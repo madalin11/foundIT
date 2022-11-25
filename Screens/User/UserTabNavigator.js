@@ -6,6 +6,7 @@ import Documents from './Documents';
 const Tab = createBottomTabNavigator();
 
 const UserTabNavigator = () => {
+
   return (
     <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: 'rgba(0, 255, 0, 0.1)' }, headerShown: false }}  >
         <Tab.Screen name="Documents" component={Documents} options={{
@@ -22,10 +23,10 @@ const UserTabNavigator = () => {
                 </View>
             ),
 
-        }}
-        />
-    </Tab.Navigator>
-  )
+            }}
+            />
+        </Tab.Navigator>
+    )
 }
 
 export default UserTabNavigator
