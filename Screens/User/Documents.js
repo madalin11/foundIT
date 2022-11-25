@@ -6,29 +6,23 @@ import Login from '../Login'
 const Documents = () => {
 
   const documentData = [
-    {
+    { id: 1,
       name: "certificat",
       location: 'xxx'
     },
     {
+      id: 2,
       name: "certificat",
       location: 'xxx'
-    },
-    {
-      name: "certificat",
-      location: 'xxx'
-    },
-    {
-      name: "certificat",
-      location: 'xxx'
-    },
+    }
   ]
   const renderItem = ({ item }) => (
-    <Item name={item.name} location={item.location} />
+    <Item key ={item.id} rname={item.name} location={item.location} />
   );
 
-  const Item = ({ name, location }) => (
-    <View style={styles.item}>
+  const Item = ({ name, location, key}) => (
+
+    <View style={styles.item}  key= {key}>
       <Text style={styles.landTitle}>{name}</Text>
       <Text style={styles.landTitle}>{location}</Text>
       <Map></Map>
@@ -42,7 +36,7 @@ const Documents = () => {
         <FlatList
           data={documentData}
           renderItem={renderItem}
-          keyExtractor={item => item._id}
+          keyExtractor={item => item.id}
         />
       </View>
     </SafeAreaView >

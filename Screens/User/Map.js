@@ -1,8 +1,8 @@
-import { StyleSheet, View, Dimensions, TouchableOpacity, Text, Linking} from 'react-native'
+import { StyleSheet, View, Dimensions, TouchableOpacity, Image, Linking } from 'react-native'
 import { useState, useEffect } from 'react';
+import NavigationImage from "../../assets/navigate-icon.png"
 import MapView, { Polyline, Marker, MAP_TYPES } from 'react-native-maps';
-import { getRouteFromGoogle, convertRoutePathToLatLng } from "../../utils/route-utils"
-//import trashcan from '../../Icons/trash-can.png'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Location from 'expo-location';
 import React from 'react'
 
@@ -17,7 +17,7 @@ export const Map = () => {
     const [location, setLocation] = useState({ latitude: 46.33188180294243, longitude: 22.11581192960193 });
     const [polylinePoints, setPolylinePoints] = useState([])
     const [errorMsg, setErrorMsg] = useState(null);
-    const [region, setRegion] = useState({ latitude: 46.33015388445716, longitude: 22.119683962567226, latitudeDelta: 0.2922, longitudeDelta: 0.0922 * ASPECT_RATIO });
+    const [region, setRegion] = useState({ latitude: 46.33015388445716, longitude: 22.119683962567226, latitudeDelta: 0.0022, longitudeDelta: 0.0922 * ASPECT_RATIO });
     const [pickupPoints, setPickupPoints] = useState([
         { latitude: 46.33188180294243, longitude: 22.11581192960193 },
         { latitude: 46.33015388445716, longitude: 22.119683962567226 },
@@ -50,7 +50,7 @@ export const Map = () => {
                 initialRegion={region}
             >
                 <Polyline
-                    coordinates={polylinePoints}
+                    coordinates={pickupPoints}
                     strokeColor="#000" // fallback for when `strokeColors` is not supported by the map-provider
                     strokeWidth={3}
                 />
@@ -67,13 +67,14 @@ export const Map = () => {
                         </Marker>
                     </View>
                 ))}
-                <TouchableOpacity style={styles.button}
-                    onPress={() => navigateMap()}
-                >
-                    <Text>Maps</Text>
-                </TouchableOpacity>
+
             </MapView>
 
+            <View style={styles.directionButton}>
+                <TouchableOpacity style={styles.button} onPress={() => { alert("you clicked me") }}>
+                    <Image source={NavigationImage} />
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
@@ -81,15 +82,8 @@ export const Map = () => {
 export default Map
 
 const styles = StyleSheet.create({
-    view: {
-        flex: 1,
-        justifyContent: 'flex-end',
-    },
     map: {
         flex: 1
-    },
-    button: {
-        padding: 50
     },
     mapContainer: {
         height: 200,
@@ -101,4 +95,26 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 35,
         overflow: "hidden",
     },
+    directionButton: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    button: {
+        backgroundColor: '#859a9b',
+        borderRadius: 20,
+        padding: 10,
+        marginBottom: 20,
+        shadowColor: '#303838',
+        shadowOffset: { width: 0, height: 5 },
+        shadowRadius: 10,
+        shadowOpacity: 0.35,
+    },
+    image: {
+        width: 40,
+        height: 40,
+
+    },
+
 })
