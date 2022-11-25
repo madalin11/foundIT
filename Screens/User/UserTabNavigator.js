@@ -6,26 +6,26 @@ import Documents from './Documents';
 const Tab = createBottomTabNavigator();
 
 const UserTabNavigator = () => {
-  return (
-    <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: 'rgba(0, 255, 0, 0.1)' }, headerShown: false }}  >
-        <Tab.Screen name="Documents" component={Documents} options={{
-            tabBarIcon: ({ focused }) => (
-                <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
-                    <Image
-                        //source={require('../iconsOurDent/chat.png')}
-                        resizeMode='contain'
-                        style={{
-                            width: 26,
-                            height: 26,
-                        }}
-                    />
-                </View>
-            ),
+    return (
+        <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: 'rgba(0, 255, 0, 0.1)' }, headerShown: false }}  >
+            <Tab.Screen name="Documents" component={Documents} options={{
+                tabBarIcon: ({ focused }) => (
+                    <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
+                        <Image
+                            //source={require('../iconsOurDent/chat.png')}
+                            resizeMode='contain'
+                            style={{
+                                width: 26,
+                                height: 26,
+                            }}
+                        />
+                    </View>
+                ),
 
-        }}
-        />
-    </Tab.Navigator>
-  )
+            }}
+            />
+        </Tab.Navigator>
+    )
 }
 
 export default UserTabNavigator
