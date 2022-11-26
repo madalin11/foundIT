@@ -8,15 +8,12 @@ import RequirementsDocsItem from '../../Components/RequirementsDocsItem';
 
 const AddDocument = ({ navigation }) => {
 
-    const [memberID, setMemberID] = useState('')
-    const [temp, settemp] = useState(auth?.currentUser?.uid);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [linkImage, setLinkImage] = useState('')
     const [chosenDocs, setChosenDocs] = useState([])
     const [chosenInstitution, setChosenInstitution] = useState('')
-    const [chosenDocIds, setChosenDocIds] = useState([])
     const scrollViewRef = useRef();
     const institutions = [
         "Primarie",
@@ -24,11 +21,6 @@ const AddDocument = ({ navigation }) => {
         'Scoala'
     ]
     const [documents, setDocuments] = useState([]);
-    const docIds = [
-        "3432432",
-        '345243',
-        'gre'
-    ]
     useEffect(() => {
         const unsubscribe = db
             .collection("documents")
@@ -54,7 +46,7 @@ const AddDocument = ({ navigation }) => {
             description: description,
             price: price,
             imageLink: linkImage || "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fdocument&psig=AOvVaw01sZfLs9ywtwYuO_nDEGNF&ust=1669551050328000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJD9vbzoy_sCFQAAAAAdAAAAABAE",
-            documentsIds: chosenDocIds,
+            documentsIds: chosenDocs.map(({id,data})=>id),
             chosenInstitution: chosenInstitution
         }).then(() => {
             console.log("Document successfuly added");
@@ -82,13 +74,11 @@ const AddDocument = ({ navigation }) => {
 
 
             <View onPress={() => Keyboard.dismiss} style={styles.container}>
-
                 <LinearGradient
                     // Background Linear Gradient
                     colors={[colors.TAB_COLOR, 'white', 'white']}
                     style={styles.background}
                 />
-
                 <View>
                     <TouchableOpacity style={{ marginTop: 60, marginLeft: 15, marginRight: -15 }} onPress={() => navigation.navigate('Documents')}>
                         <Image
@@ -196,7 +186,6 @@ const AddDocument = ({ navigation }) => {
                         onSelect={(selectedItem, index) => {
                             console.log(selectedItem, index)
                             setChosenDocs([...chosenDocs,documents[index]]);
-                            console.log(chosenDocIds)
                         }}
                         dropdownStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius: 5 }}
                         buttonStyle={{
