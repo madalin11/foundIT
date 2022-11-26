@@ -1,11 +1,14 @@
 import { StyleSheet, View, Dimensions, TouchableOpacity, Image, Linking, Text } from 'react-native'
 import { useState, useEffect } from 'react';
-import NavigationImage from "../../assets/navigate-icon.png"
+import NavigationImage from "../assets/navigation.png"
 import MapView, { Polyline, Marker, MAP_TYPES } from 'react-native-maps';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Location from 'expo-location';
-import cityhall from '../../assets/cityhall.png'
-import navigate from '../../assets/navigate-icon.png'
+import colors from '../colors';
+import cityhall from '../assets/cityhall.png'
+import clock from '../assets/clock.png'
+import navigate from '../assets/navigate-icon.png'
+import {Request} from '../Screens/User/Requests'
 import React from 'react'
 
 const polyline = require('@mapbox/polyline');
@@ -14,10 +17,9 @@ const { width, height } = Dimensions.get('window');
 
 const ASPECT_RATIO = width / height;
 
-export const Map = () => {
-
-    const [location, setLocation] = useState({ latitude: 46.33188180294243, longitude: 22.11581192960193 });
-    const [polylinePoints, setPolylinePoints] = useState([])
+export const Map = (props) => {
+    console.log(props)
+    const [location, setLocation] = useState(props.location);
     const [errorMsg, setErrorMsg] = useState(null);
     const [region, setRegion] = useState({ latitude: 46.33015388445716, longitude: 22.119683962567226, latitudeDelta: 0.0022, longitudeDelta: 0.0922 * ASPECT_RATIO });
     const [pickupPoints, setPickupPoints] = useState([
@@ -44,8 +46,26 @@ export const Map = () => {
 
         Linking.openURL(url);
     }
+
+    const makeAnAppointment = () => {
+        props.navigation.navigate("RequestsDetails")
+    }
+    
+
     return (
         <View style={styles.mapContainer}>
+            <View style={styles.navigationContainer}>
+                <Text style={styles.text}>{props.documentName}</Text>
+                <TouchableOpacity style={styles.overMapButton}
+                    onPress={navigateMap}
+                >
+                    <Image
+                        source={navigate}
+                        style={{ width: 30, height: 30, color: 'white' }}
+                        resizeMode="contain"
+                    />
+                </TouchableOpacity>
+            </View>
             <MapView
                 provider={"google"}
                 style={styles.map}
@@ -59,7 +79,7 @@ export const Map = () => {
                 />
                 <View>
                     <Marker
-                        coordinate={pickupPoints[0]}
+                        coordinate={location}
                         pinColor='#339A3E'
                     //image={cityhall}
                     >
@@ -70,23 +90,26 @@ export const Map = () => {
                         />
                     </Marker>
                 </View>
-                <View>
-                    <TouchableOpacity style={styles.overMapButton}
-                        onPress={navigateMap}
-                    >
-                        <Image
-                            source={navigate}
-                            style={{ width: 30, height: 30 , color: 'white'}}
-                            resizeMode="contain"
-                        />
-                    </TouchableOpacity>
-                </View>
             </MapView>
-            <TouchableOpacity style={styles.mapButton}
-                onPress={() =>{console.log("navigate")}}
-            >
-                <Text style={{ color: 'black' }}>Make an appointment</Text>
-            </TouchableOpacity>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.mapButton}
+                    onPress={() => {props.seeNecesarDocuments()}}
+                >
+                    <Text style={{ color: 'black' }}>See Necessar Documents</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.mapButton}
+                    onPress={makeAnAppointment}
+                >
+                    <View style={styles.appointment}>
+                    <Image
+                        source={clock}
+                        style={{ width: 30, height: 30, color: 'white' }}
+                        resizeMode="contain"
+                    />
+                    <Text style={{ color: 'black' }}>Make an appointment</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
@@ -99,10 +122,7 @@ const styles = StyleSheet.create({
     },
     mapContainer: {
         height: 200,
-        // borderBottomLeftRadius: 35,
-        // borderBottomRightRadius: 45,
-        // borderTopLeftRadius: 35,
-        // borderTopRightRadius: 35,
+        //flexDirection: 'column',
         overflow: "hidden",
     },
     directionButton: {
@@ -112,19 +132,38 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     mapButton: {
-        backgroundColor: 'white',
-        //marginBottom: 10,
+        backgroundColor: colors.YELLOW,
+        marginRight: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: 'row',
-        height: 40
+        height: 30
     },
     overMapButton: {
-        alignItems: 'flex-end'
+        alignItems: 'flex-end',
+        padding: 5
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+    },
+    navigationContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: colors.BEIGE
     },
     image: {
         // width: 40,
         // height: 40,
     },
+    text: {
+        color: colors.PURPLE_TRANSPARENT,
+        fontSize: 18
+    },
+    appointment: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        
+    }
 
 })

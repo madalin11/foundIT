@@ -1,21 +1,38 @@
 import { StyleSheet, Text, View, FlatList, SafeAreaView } from 'react-native'
-import { Map } from "./Map"
+import { Map } from "../../Components/Map"
 import React from 'react'
+import { useState, useEffect } from 'react';
 import Login from '../Login'
 
-const Documents = () => {
+const Documents = ({navigation}) => {
+  const [ids, setIds] = useState(['123']) //ids from db
+  const seeNecesarDocuments = () => {
+    navigation.navigate('Documents', {
+        id: ids
+    })
+  }
 
-  const documentData = [
-    { id: 1,
+  const [documentData, setDocumentData] = useState([
+    {
+      id: 1,
       name: "certificat",
-      location: 'xxx'
+      location:
+      {
+        latitude: 46.33188180294243,
+        longitude: 22.11581192960193
+      }
     },
     {
       id: 2,
       name: "certificat",
-      location: 'xxx'
+      location:
+      {
+        latitude: 46.33188180294243,
+        longitude: 22.11581192960193
+      }
     }
-  ]
+  ])
+
   const renderItem = ({ item }) => (
     <Item name={item.name} location={item.location} />
   );
@@ -23,8 +40,12 @@ const Documents = () => {
   const Item = ({ name }) => (
 
     <View style={styles.item}>
-      <Text style={styles.title}>{name}</Text>
-      <Map/>
+      <Map
+        location={documentData[0].location}
+        documentName={documentData[0].name}
+        navigation ={navigation}
+        seeNecesarDocuments = {seeNecesarDocuments}
+      />
     </View>
   );
 
@@ -71,6 +92,6 @@ const styles = StyleSheet.create({
     borderColor: 'black',
   },
   title: {
-      fontSize: 32,
+    fontSize: 32,
   }
 })
