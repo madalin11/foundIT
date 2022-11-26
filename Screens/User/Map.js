@@ -47,6 +47,7 @@ export const Map = () => {
             <MapView
                 provider={"google"}
                 style={styles.map}
+                mapType={MAP_TYPES.SATELLITE}
                 initialRegion={region}
             >
                 <Polyline
@@ -54,19 +55,13 @@ export const Map = () => {
                     strokeColor="#000" // fallback for when `strokeColors` is not supported by the map-provider
                     strokeWidth={3}
                 />
-                {pickupPoints.map(pickupPoint => (
-                    <View>
-                        <Marker
-                            coordinate={pickupPoint}
-                        //pinColor='#339A3E'
-                        //image={trashcan}
-                        >
-                            {/* <Image
-                source={trashcan}
-                /> */}
-                        </Marker>
-                    </View>
-                ))}
+                <View>
+                    <Marker
+                        coordinate={pickupPoints[0]}
+                        pinColor='#339A3E'
+                    >
+                    </Marker>
+                </View>
             </MapView>
             <TouchableOpacity style={styles.mapButton}
                 onPress={navigateMap}
@@ -85,8 +80,6 @@ const styles = StyleSheet.create({
     },
     mapContainer: {
         height: 200,
-        bottom: 10,
-        margin: 10,
         borderBottomLeftRadius: 35,
         borderBottomRightRadius: 45,
         borderTopLeftRadius: 35,
