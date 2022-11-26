@@ -5,16 +5,21 @@ import { Button, Switch } from 'react-native-elements';
 import Login from '../Login';
 import Accounts from './Accounts';
 import Feedbacks from '../User/Feedbacks';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import colors from '../../colors';
+
+
+const Tab = createBottomTabNavigator();
 
 const AdminTabNavigator = () => {
     
     return (
-        <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: 'rgba(0, 255, 0, 0.1)' }, headerShown: false }}  >
+        <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: colors.TAB_COLOR }, headerShown: false }}  >
             <Tab.Screen name="Documents" component={Documents} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
                         <Image
-                            source={require('../../icons/login.png')}
+                            source={require('../../icons/documents.png')}
                             resizeMode='contain'
                             style={{
                                 width: 26,
@@ -29,7 +34,7 @@ const AdminTabNavigator = () => {
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
                         <Image
-                            source={require('../../icons/login.png')}
+                            source={require('../../icons/account.png')}
                             resizeMode='contain'
                             style={{
                                 width: 26,
@@ -44,7 +49,7 @@ const AdminTabNavigator = () => {
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
                         <Image
-                            source={require('../../icons/login.png')}
+                            source={require('../../icons/feedback.png')}
                             resizeMode='contain'
                             style={{
                                 width: 26,
