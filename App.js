@@ -23,7 +23,6 @@ export default function App() {
         <Stack.Screen options={{ headerShown: false }} name="Register screen" component={Register} />
         <Stack.Screen options={{ headerShown: false }} name="Admin tab navigator" component={AdminTabNavigator} />
         <Stack.Screen options={{ headerShown: false }} name="Operand tab navigator" component={OperandTabNavigator} />
-        <Stack.Screen options={{ headerShown: false }} name="User tab navigator" component={UserTabNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );
