@@ -8,14 +8,17 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AdminTabNavigator from './Screens/Admin/AdminTabNavigator';
 import OperandTabNavigator from './Screens/Operand/OperandTabNavigator';
 import UserTabNavigator from './Screens/User/UserTabNavigator';
+import Splash from './Screens/Splash/Splash';
+import GetStarted from './Screens/Splash/GetStarted';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
     <NavigationContainer backgroundColor={'red'}>
-      <Stack.Navigator>
-      <Stack.Screen options={{ headerShown: false }} name="User tab navigator" component={UserTabNavigator} />
+      <Stack.Navigator> 
+        <Stack.Screen options={{ headerShown: false }} name="Spalash screen" component={Splash} />
+        <Stack.Screen options={{ headerShown: false }} name="Get started screen" component={GetStarted} />
         <Stack.Screen options={{ headerShown: false }} name="Login screen" component={Login} />
         <Stack.Screen options={{ headerShown: false }} name="Register screen" component={Register} />
         <Stack.Screen options={{ headerShown: false }} name="Admin tab navigator" component={AdminTabNavigator} />
