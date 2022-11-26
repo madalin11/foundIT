@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 
 import profilePicture from "../../icons/profile-picture.png"
 import emptyStar from "../../icons/empty-star.png"
@@ -7,7 +7,9 @@ import filledStar from "../../icons/filled-star.png"
 
 const FeedbackUserCard = (props) => {
 
-    const {profilePicture, name, comment} = props.feedback;
+    const {profilePicture, name, comment, givenStars} = props.feedback;
+
+    const [starCount, setStarCount] = useState(4);
 
     return (
         <View style={styles.container}>
@@ -22,13 +24,11 @@ const FeedbackUserCard = (props) => {
             </View>
 
             <View style={{flexDirection: 'row'}}>
-                <Image style={styles.starContainer} source={filledStar} />
-                <Image style={styles.starContainer} source={filledStar} />
-                <Image style={styles.starContainer} source={filledStar} />
-                <Image style={styles.starContainer} source={filledStar} />
-                <Image style={styles.starContainer} source={filledStar} />
-
-                
+                <Image style={styles.starContainer} source={givenStars >= 1 ? filledStar : emptyStar} />
+                <Image style={styles.starContainer} source={givenStars >= 2 ? filledStar : emptyStar} />
+                <Image style={styles.starContainer} source={givenStars >= 3 ? filledStar : emptyStar} />
+                <Image style={styles.starContainer} source={givenStars >= 4 ? filledStar : emptyStar} />
+                <Image style={styles.starContainer} source={givenStars >= 5 ? filledStar : emptyStar} />                
             </View>
 
             <View styles={styles.commentContainer}>

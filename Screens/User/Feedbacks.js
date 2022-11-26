@@ -19,24 +19,42 @@ const Feedbacks = () => {
       profilePicture: dummyPicture,
       name: "Stefan Hera",
       comment: "Nice documents mate.",
+      givenStars: 4
     },
     {
       id: 2,
       profilePicture: dummyPicture,
       name: "Alex Darau",
       comment: "I think it's the best app I've ever used!",
+      givenStars: 5
     },
     {
       id: 3,
       profilePicture: dummyPicture,
       name: "Madalin Puiu",
       comment: "NOICE! NOICE! NOICE! NOICE! NOICE! NOICE! NOICE! NOICE! ",
+      givenStars: 5
     },
     {
       id: 4,
       profilePicture: dummyPicture,
       name: "Andrei Pop",
       comment: "I am Ascendant.",
+      givenStars: 3
+    },
+    {
+      id: 5,
+      profilePicture: dummyPicture,
+      name: "Jacky Bobster",
+      comment: "Imma leave now.",
+      givenStars: 1
+    },
+    {
+      id: 6,
+      profilePicture: dummyPicture,
+      name: "King Arthur",
+      comment: "Where is Excalibur?",
+      givenStars: 1
     },
   ];
 
@@ -45,7 +63,6 @@ const Feedbacks = () => {
   }, []);
 
   const filterFeedbacksByName = (text) => {
-    // setSearchText(text);
 
     if(text){
       const filteredFeedback = feedbackList.filter(item => {
