@@ -3,8 +3,8 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Documents from './Documents';
 import Search from './Search';
-import Navigation from './Map';
-import Requests from './Requests';
+import Navigation from '../../Components/Map';
+import RequestsDetails from './RequestDetails';
 import Feedbacks from './Feedbacks';
 import ModifyProfile from '../ModifyProfile';
 
@@ -30,7 +30,7 @@ const UserTabNavigator = () => {
 
             }}
             />
-            <Tab.Screen name="Requests" component={Requests} options={{
+            <Tab.Screen name="RequestsDetails" component={RequestsDetails} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
                         <Image
