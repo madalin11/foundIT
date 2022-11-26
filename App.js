@@ -14,6 +14,9 @@ import DocumentDetails from './Screens/User/DocumentDetails';
 import CreateRequest from './Screens/User/CreateRequest';
 import RequestDetails from './Screens/User/RequestDetails';
 import AddFeedback from './Screens/User/AddFeedback';
+import AddDocument from './Screens/Admin/AddDocument';
+import ModifyDocument from './Screens/Admin/ModifyDocument';
+import ModifyAccount from './Screens/Admin/ModifyAccount';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -32,6 +35,11 @@ export default function App() {
         <Stack.Screen options={{ headerShown: false }} name="Create request screen" component={CreateRequest} />
         <Stack.Screen options={{ headerShown: false }} name="Request details screen" component={RequestDetails} />
         <Stack.Screen options={{ headerShown: false }} name="Add feedback screen" component={AddFeedback} />
+        <Stack.Screen options={{ headerShown: false }} name="Add document screen" component={AddDocument} />
+        <Stack.Screen options={{ headerShown: false }} name="Modify document screen" component={ModifyDocument} />
+        <Stack.Screen options={{ headerShown: false }} name="Modify account screen" component={ModifyAccount} />
+      
+      
       </Stack.Navigator>
     </NavigationContainer>
   );
