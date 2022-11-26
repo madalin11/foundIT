@@ -1,21 +1,50 @@
 import React, { useState, useEffect } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, TouchableWithoutFeedback, Keyboard, Image, Platform } from 'react-native'
-import { auth } from '../firebase'
+import { auth,db } from '../firebase'
 
 const Login = ({ navigation }) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [memberID, setMemberID] = useState('')
+    const [temp, settemp] = useState(auth?.currentUser?.uid);
+
+    useEffect(() => {
+        const unsubscribe = db
+            .collection("peoples")
+            .onSnapshot(snapshot => {
+                setMemberID(
+                    snapshot.docs.filter((doc) => {
+                        let t = false;
+
+                        if (temp == doc.id) {
+                            t = true;
+                        }
+                        return t;
+                    }
+                    ).map((doc) => ({
+                        id: doc.id,
+                        data: doc.data()
+                    })))
+
+            })
+        return unsubscribe;
+    }, [temp])
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
-                navigation.replace("User tab navigator")
+                if (memberID[0]?.data.ID == 1) {
+                    navigation.replace("Tab navigator screen");
+                } else if (memberID[0]?.data.ID == 2) {
+                    navigation.replace("Staff home screen");
+                } else if (memberID[0]?.data.ID == 3) {
+                    navigation.replace("User home screen");
+                }
             }
         })
-
         return unsubscribe
-    }, [])
+    }, [memberID])
 
     const handleLogin = () => {
         auth

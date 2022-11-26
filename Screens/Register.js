@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
 import { auth, db } from '../firebase'
 
@@ -35,15 +35,15 @@ const Register = ({ navigation }) => {
         return true;
     };
 
-    // useEffect(() => {
-    //   const unsubscribe = auth.onAuthStateChanged(user => {
-    //     if (user) {
-    //       navigation.replace("Tab Stack")
-    //     }
-    //   })
+    useEffect(() => {
+      const unsubscribe = auth.onAuthStateChanged(user => {
+        if (user) {
+          navigation.replace("User tab navigator")
+        }
+      })
 
-    //   return unsubscribe
-    // }, [])
+      return unsubscribe
+    }, [])
 
     async function createUser(temp, name) {
         await db.collection("users").doc(temp).set({
