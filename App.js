@@ -10,6 +10,10 @@ import OperandTabNavigator from './Screens/Operand/OperandTabNavigator';
 import UserTabNavigator from './Screens/User/UserTabNavigator';
 import Splash from './Screens/Splash/Splash';
 import GetStarted from './Screens/Splash/GetStarted';
+import DocumentDetails from './Screens/User/DocumentDetails';
+import CreateRequest from './Screens/User/CreateRequest';
+import RequestDetails from './Screens/User/RequestDetails';
+import AddFeedback from './Screens/User/AddFeedback';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -24,6 +28,10 @@ export default function App() {
         <Stack.Screen options={{ headerShown: false }} name="Admin tab navigator" component={AdminTabNavigator} />
         <Stack.Screen options={{ headerShown: false }} name="Operand tab navigator" component={OperandTabNavigator} />
         <Stack.Screen options={{ headerShown: false }} name="User tab navigator" component={UserTabNavigator} />
+        <Stack.Screen options={{ headerShown: false }} name="Document details screen" component={DocumentDetails} />
+        <Stack.Screen options={{ headerShown: false }} name="Create request screen" component={CreateRequest} />
+        <Stack.Screen options={{ headerShown: false }} name="Request details screen" component={RequestDetails} />
+        <Stack.Screen options={{ headerShown: false }} name="Add feedback screen" component={AddFeedback} />
       </Stack.Navigator>
     </NavigationContainer>
   );
