@@ -11,7 +11,7 @@ const Login = ({ navigation }) => {
 
     useEffect(() => {
         const unsubscribe = db
-            .collection("peoples")
+            .collection("users")
             .onSnapshot(snapshot => {
                 setMemberID(
                     snapshot.docs.filter((doc) => {
@@ -35,11 +35,11 @@ const Login = ({ navigation }) => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
                 if (memberID[0]?.data.ID == 1) {
-                    navigation.replace("Tab navigator screen");
+                    navigation.replace("User tab navigator");
                 } else if (memberID[0]?.data.ID == 2) {
-                    navigation.replace("Staff home screen");
+                    navigation.replace("Operand tab navigator");
                 } else if (memberID[0]?.data.ID == 3) {
-                    navigation.replace("User home screen");
+                    navigation.replace("Admin tab navigator");
                 }
             }
         })
@@ -52,6 +52,8 @@ const Login = ({ navigation }) => {
             .then(userCredentials => {
                 const user = userCredentials.user;
                 console.log('Logged in with:', user);
+                //navigation.replace("User tab navigator");
+                settemp(auth?.currentUser?.uid);
             })
             .catch(error => alert(error.message))
     }
