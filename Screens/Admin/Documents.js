@@ -1,11 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 
-const Documents = () => {
+const Documents = ({navigation}) => {
   return (
-    <View>
+    <SafeAreaView>
       <Text>Admin Documents</Text>
-    </View>
+      <TouchableOpacity onPress={()=> navigation.navigate("Add document screen")}>
+        <Text>
+          Add document
+        </Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   )
 }
 
