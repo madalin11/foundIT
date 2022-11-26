@@ -1,4 +1,4 @@
-import { StyleSheet, View, Dimensions, TouchableOpacity, Image, Linking } from 'react-native'
+import { StyleSheet, View, Dimensions, TouchableOpacity, Image, Linking, Text } from 'react-native'
 import { useState, useEffect } from 'react';
 import NavigationImage from "../../assets/navigate-icon.png"
 import MapView, { Polyline, Marker, MAP_TYPES } from 'react-native-maps';
@@ -67,14 +67,12 @@ export const Map = () => {
                         </Marker>
                     </View>
                 ))}
-
             </MapView>
-
-            <View style={styles.directionButton}>
-                <TouchableOpacity style={styles.button} onPress={() => { alert("you clicked me") }}>
-                    <Image source={NavigationImage} />
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity style={styles.mapButton}
+                onPress={navigateMap}
+            >
+                <Text style={{ color: 'black' }}>Navigate to location</Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -101,20 +99,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    button: {
-        backgroundColor: '#859a9b',
-        borderRadius: 20,
-        padding: 10,
-        marginBottom: 20,
-        shadowColor: '#303838',
-        shadowOffset: { width: 0, height: 5 },
-        shadowRadius: 10,
-        shadowOpacity: 0.35,
+    mapButton: {
+        backgroundColor: 'white',
+        marginBottom: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        height: 40
     },
     image: {
-        width: 40,
-        height: 40,
-
+        // width: 40,
+        // height: 40,
     },
 
 })
