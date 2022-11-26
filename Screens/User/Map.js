@@ -4,6 +4,8 @@ import NavigationImage from "../../assets/navigate-icon.png"
 import MapView, { Polyline, Marker, MAP_TYPES } from 'react-native-maps';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Location from 'expo-location';
+import cityhall from '../../assets/cityhall.png'
+import navigate from '../../assets/navigate-icon.png'
 import React from 'react'
 
 const polyline = require('@mapbox/polyline');
@@ -47,6 +49,7 @@ export const Map = () => {
             <MapView
                 provider={"google"}
                 style={styles.map}
+                mapType={MAP_TYPES.SATELLITE}
                 initialRegion={region}
             >
                 <Polyline
@@ -54,24 +57,35 @@ export const Map = () => {
                     strokeColor="#000" // fallback for when `strokeColors` is not supported by the map-provider
                     strokeWidth={3}
                 />
-                {pickupPoints.map(pickupPoint => (
-                    <View>
-                        <Marker
-                            coordinate={pickupPoint}
-                        //pinColor='#339A3E'
-                        //image={trashcan}
-                        >
-                            {/* <Image
-                source={trashcan}
-                /> */}
-                        </Marker>
-                    </View>
-                ))}
+                <View>
+                    <Marker
+                        coordinate={pickupPoints[0]}
+                        pinColor='#339A3E'
+                    //image={cityhall}
+                    >
+                        <Image
+                            source={cityhall}
+                            style={{ width: 30, height: 30 }}
+                            resizeMode="contain"
+                        />
+                    </Marker>
+                </View>
+                <View>
+                    <TouchableOpacity style={styles.overMapButton}
+                        onPress={navigateMap}
+                    >
+                        <Image
+                            source={navigate}
+                            style={{ width: 30, height: 30 , color: 'white'}}
+                            resizeMode="contain"
+                        />
+                    </TouchableOpacity>
+                </View>
             </MapView>
             <TouchableOpacity style={styles.mapButton}
-                onPress={navigateMap}
+                onPress={() =>{console.log("navigate")}}
             >
-                <Text style={{ color: 'black' }}>Navigate to location</Text>
+                <Text style={{ color: 'black' }}>Make an appointment</Text>
             </TouchableOpacity>
         </View>
     )
@@ -85,12 +99,10 @@ const styles = StyleSheet.create({
     },
     mapContainer: {
         height: 200,
-        bottom: 10,
-        margin: 10,
-        borderBottomLeftRadius: 35,
-        borderBottomRightRadius: 45,
-        borderTopLeftRadius: 35,
-        borderTopRightRadius: 35,
+        // borderBottomLeftRadius: 35,
+        // borderBottomRightRadius: 45,
+        // borderTopLeftRadius: 35,
+        // borderTopRightRadius: 35,
         overflow: "hidden",
     },
     directionButton: {
@@ -101,11 +113,14 @@ const styles = StyleSheet.create({
     },
     mapButton: {
         backgroundColor: 'white',
-        marginBottom: 10,
+        //marginBottom: 10,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
         height: 40
+    },
+    overMapButton: {
+        alignItems: 'flex-end'
     },
     image: {
         // width: 40,
