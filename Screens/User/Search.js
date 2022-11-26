@@ -43,20 +43,16 @@ export default Search
 const styles = StyleSheet.create({
     document: {
         flex:1,
-        alignItems: 'center',
-        justifyContent: 'flex-start',
+        //alignItems: 'center',
+        justifyContent: 'center',
+        alignContent: 'center',
+        //backgroundColor:'black'
 
-    },
-    title: {
-        fontSize: 20,
-        top: 20
-    },
-    containerFlat: {
-        flex:1,
-        alignItems: 'center',
-        justifyContent: 'flex-start',
     },
     item: {
         backgroundColor: 'red'
+    },
+    containerFlat: {
+        alignItems: 'center'
     }
 })

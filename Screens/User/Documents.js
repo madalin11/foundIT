@@ -47,9 +47,6 @@ export default Documents
 const styles = StyleSheet.create({
   blogScreen: {
     flex: 1,
-    //alignItems: 'center',
-    //justifyContent: 'center',
-    //backgroundColor: '#EAEAEA'
   },
   container: {
     flex: 1,
@@ -69,8 +66,7 @@ const styles = StyleSheet.create({
     marginVertical: 2,
     //marginHorizontal: 10,
     marginTop: 10,
-    //backgroundColor: 'gray',
-    borderRadius: 15,
+    //borderRadius: 15,
     borderWidth: 1,
     borderColor: 'black',
   },
