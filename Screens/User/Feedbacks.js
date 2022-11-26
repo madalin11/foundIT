@@ -4,10 +4,12 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { TextInput } from 'react-native'
 import { ScrollView } from 'react-native'
 import FeedbackUserCard from './FeedbackUserCard'
+import { TouchableOpacity } from 'react-native'
 
 import dummyPicture from "../../icons/profile-picture.png"
 
 const Feedbacks = () => {
+  
 
   const [searchText, setSearchText] = useState("");
 
@@ -62,6 +64,27 @@ const Feedbacks = () => {
     setFeedbackList(data);
   }, []);
 
+  const bodyForMail = {
+    email: "" // <-- email to send
+  }
+
+  const handleSendEmail = async () => {
+    const response = await fetch("http://localhost:3000/", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(bodyForMail)
+    });
+
+    console.log(response.status);
+
+    // if(response.status === 500){
+    //   alert("Failed POST request.");
+    // }
+    // console.log("🚀 ~ file: Feedbacks.js ~ line 77 ~ handleSendEmail ~ response", response)
+  }
+
   const filterFeedbacksByName = (text) => {
 
     if(text){
@@ -90,6 +113,10 @@ const Feedbacks = () => {
         value={searchText}
         onChangeText={text => filterFeedbacksByName(text)}
       />
+
+      <TouchableOpacity style={styles.buttonStyle} onPress={handleSendEmail}>
+          <Text>PRESS!ME!</Text>
+      </TouchableOpacity>
 
       <ScrollView style={styles.scrollContainer}>
         {feedbackList.map((feedback) => {
@@ -128,5 +155,10 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     padding: 15,
+  },
+  buttonStyle: {
+    backgroundColor: "lightblue",
+    width: 80,
+    height: 35
   }
 })
