@@ -8,6 +8,21 @@ const Tab = createBottomTabNavigator();
 
 const OperandTabNavigator = () => {
     <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: 'rgba(0, 255, 0, 0.1)' }, headerShown: false }}  >
+            <Tab.Screen name="Requests" component={Requests} options={{
+                tabBarIcon: ({ focused }) => (
+                    <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
+                        <Image
+                            source={require('../../icons/login.png')}
+                            resizeMode='contain'
+                            style={{
+                                width: 26,
+                                height: 26,
+                            }}
+                        />
+                    </View>
+                ),
+            }}
+            />
             <Tab.Screen name="Profile" component={ModifyProfile} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
@@ -21,9 +36,9 @@ const OperandTabNavigator = () => {
                         />
                     </View>
                 ),
-
             }}
             />
+            
         </Tab.Navigator>
 }
 

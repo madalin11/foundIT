@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const Requests = () => {
+const ModifyDocument = () => {
   return (
     <View>
-      <Text>Requests</Text>
+      <Text>ModifyDocument</Text>
     </View>
   )
 }
 
-export default Requests
+export default ModifyDocument
 
 const styles = StyleSheet.create({})

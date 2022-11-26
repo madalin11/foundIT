@@ -3,70 +3,60 @@ import React, { useState } from 'react'
 import Documents from './Documents';
 import { Button, Switch } from 'react-native-elements';
 import Login from '../Login';
+import Accounts from './Accounts';
+import Feedbacks from '../User/Feedbacks';
 
 const AdminTabNavigator = () => {
-
-    const screen = () => {
-        switch (first) {
-            case 0:
-                return <Documents></Documents>
-            case 1:
-
-                break;
-            case 2:
-
-                break;
-            case 3:
-
-                break;
-            case 4:
-
-                break;
-
-            default: 0
-                break;
-        }
-
-
-        return <Documents></Documents>;
-    }
-
-
-    const [first, setfirst] = useState(0);
     
     return (
-        <SafeAreaView style={styles.container}>
-            <View>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.text}>
-                        Tibi
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.text}>
-                        Tibi
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.text}>
-                        Tibi
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.text}>
-                        Tibi
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.text}>
-                        Tibi
-                    </Text>
-                </TouchableOpacity>
-            </View>
-
-            {screen()}
-
-        </SafeAreaView>
+        <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: 'rgba(0, 255, 0, 0.1)' }, headerShown: false }}  >
+            <Tab.Screen name="Documents" component={Documents} options={{
+                tabBarIcon: ({ focused }) => (
+                    <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
+                        <Image
+                            source={require('../../icons/login.png')}
+                            resizeMode='contain'
+                            style={{
+                                width: 26,
+                                height: 26,
+                            }}
+                        />
+                    </View>
+                ),
+            }}
+            />
+            <Tab.Screen name="Accounts" component={Accounts} options={{
+                tabBarIcon: ({ focused }) => (
+                    <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
+                        <Image
+                            source={require('../../icons/login.png')}
+                            resizeMode='contain'
+                            style={{
+                                width: 26,
+                                height: 26,
+                            }}
+                        />
+                    </View>
+                ),
+            }}
+            />
+            <Tab.Screen name="Feedbacks" component={Feedbacks} options={{
+                tabBarIcon: ({ focused }) => (
+                    <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
+                        <Image
+                            source={require('../../icons/login.png')}
+                            resizeMode='contain'
+                            style={{
+                                width: 26,
+                                height: 26,
+                            }}
+                        />
+                    </View>
+                ),
+            }}
+            />
+            
+        </Tab.Navigator>
     )
 }
 
