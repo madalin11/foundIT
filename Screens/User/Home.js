@@ -9,11 +9,11 @@ const Home = ({ navigation }) => {
     const [documents, setDocuments] = useState([
         {
             id: 1,
-            name: "birth certificate"
+            name: "Birth certificate"
         },
         {
             id: 2,
-            name: "birth xxx"
+            name: "Mariage certificate"
         }
     ])
     const renderItem = ({ item }) => (
@@ -30,14 +30,15 @@ const Home = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.safeContainer}>
             <View style={styles.topViewContent}>
-                <View>
+                <View style={styles.nameContainer}>
                     <Text style={styles.title}>Hello, Aleps!</Text>
                     <Text style={styles.description}>What document you want to take today??</Text>
                 </View>
-                <Image 
-                    style={styles.imageContainer}
-                    source={profilePicture}
-                />
+                <View style={styles.imageContainer}>
+                    <Image
+                        source={profilePicture}
+                    />
+                </View>
             </View>
             <View style={styles.container}>
                 <Text style={styles.title}>Documents List</Text>
@@ -60,7 +61,8 @@ const styles = StyleSheet.create({
     container: {
         padding: 20,
         flex: 4,
-        marginVertical: 20
+       // marginVertical: 20,
+        backgroundColor: colors.BEIGE,
         //justifyContent: 'space-around',
         //alignItems: 'space-around'
     },
@@ -68,21 +70,29 @@ const styles = StyleSheet.create({
         backgroundColor: colors.BEIGE,
         alignItems: 'center',
         justifyContent: 'pace-around',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     topViewContent: {
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-around',
         backgroundColor: colors.BLUE,
-        height: 100,
-        borderBottomLeftRadius: 25,
-        borderBottomRightRadius: 25,
-        padding: 20,
-        //marginVertical: 50,
         display: 'flex',
     },
     title: {
         fontSize: 20,
-        bottom: 20
-    }
+    },
+    nameContainer: {
+        justifyContent: 'center'
+    },
+    imageContainer: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    description: {
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'row',
+        fontSize: 16
+    },
 })

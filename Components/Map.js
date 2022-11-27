@@ -21,7 +21,7 @@ const ASPECT_RATIO = width / height;
 export const Map = (props) => {
     const [location, setLocation] = useState(props.location);
     const [errorMsg, setErrorMsg] = useState(null);
-    const [region, setRegion] = useState({ latitude: 46.33015388445716, longitude: 22.119683962567226, latitudeDelta: 0.0022, longitudeDelta: 0.0922 * ASPECT_RATIO });
+    const [region, setRegion] = useState({ latitude: props.location.latitude, longitude: props.location.longitude, latitudeDelta: 0.0022, longitudeDelta: 0.0922 * ASPECT_RATIO });
 
     let text = 'Waiting..';
     if (errorMsg) {
@@ -32,7 +32,7 @@ export const Map = (props) => {
 
     const navigateMap = async () => {
         const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
-        const latLng = `${46.33188180294243},${22.11581192960193}`;
+        const latLng = `${props.location.latitude},${props.location.longitude}`;
         const label = 'Custom Label';
         const url = Platform.select({
             ios: `${scheme}${label}@${latLng}`,
@@ -56,7 +56,7 @@ export const Map = (props) => {
             <View style={styles.navigationContainer}>
                 <View style={styles.document}>
                     <Text style={styles.text}>{props.documentName}</Text>
-                    <Text style={styles.text}>{props.documentName}</Text>
+                    <Text style={styles.text}>{props.locationName}</Text>
                 </View>
             </View>
             <MapView

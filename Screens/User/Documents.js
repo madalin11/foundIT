@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, SafeAreaView } from 'react-native'
+import { StyleSheet, Text, View, FlatList, SafeAreaView, ToastAndroid } from 'react-native'
 import { Map } from "../../Components/Map"
 import React from 'react'
 import { useState, useEffect } from 'react';
@@ -20,7 +20,8 @@ const Documents = (props) => {
   const [documentData, setDocumentData] = useState([
     {
       id: 1,
-      name: "certificat",
+      name: "Document 1",
+      locationName: "City Hall",
       location:
       {
         latitude: 46.33188180294243,
@@ -29,25 +30,18 @@ const Documents = (props) => {
     },
     {
       id: 2,
-      name: "certificat",
+      name: "Document 2",
+      locationName: "City Hall",
       location:
-      {
-        latitude: 46.33188180294243,
-        longitude: 22.11581192960193
+      { 
+        latitude: 45.7392503641402,
+        longitude: 21.231844165573836
       }
     },
     {
       id: 3,
-      name: "certificat",
-      location:
-      {
-        latitude: 46.33188180294243,
-        longitude: 22.11581192960193
-      }
-    },
-    {
-      id: 4,
-      name: "certificat",
+      name: "Documnet 3",
+      locationName: "City Hall",
       location:
       {
         latitude: 46.33188180294243,
@@ -57,15 +51,16 @@ const Documents = (props) => {
   ])
 
   const renderItem = ({ item }) => (
-    <Item name={item.name} location={item.location} />
+    <Item name={item.name} location={item.location} locationName={item.locationName} />
   );
 
-  const Item = ({ name }) => (
+  const Item = ({ name, location, locationName}) => (
 
     <View style={styles.item}>
       <Map
-        location={documentData[0].location}
-        documentName={documentData[0].name}
+        location={location}
+        documentName={name}
+        locationName={locationName}
         navigation ={props.navigation}
         seeNecesarDocuments = {seeNecesarDocuments}
         navigateMap = {navigateMap}

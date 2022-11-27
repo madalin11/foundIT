@@ -1,112 +1,145 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, SafeAreaView, Image } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, SafeAreaView, Image} from 'react-native'
+import Toast from 'react-native-root-toast';
 import React from 'react'
 import { useState } from 'react'
 import CalendarStrip from 'react-native-calendar-strip';
 import cityhall from '../../assets/primaria.png'
+import clock from '../../assets/clock.png'
 import colors from "../../colors"
-const RequestDetails = () => {
+const RequestDetails = (props) => {
   const today = new Date();
 
+  const [hour, setHour] = useState(0)
+  const [date, setDate] = useState(0)
   const setPickupDate = (date) => {
-    console.log(date)
+    console.log(new Date(date))
+    setDate(new Date(date))
   }
-  const setHour = (date) => {
-    console.log(date)
+  const setxHour = (id) => {
+    console.log(availableHours.flat().filter((item) => item.id === id)[0])
+    setHour(availableHours.flat().filter((item) => item.id === id)[0].hour)
   }
 
   const makeApp = async () => {
+    const body = {
+      email: "daraualexandru@gmail.com",
+      hour: hour,
+      date: date
+    }
     const fetchResult = await fetch("http://localhost:3000", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({"email": "daraualexandru@gmail.com"})
+      body: JSON.stringify(body)
     });
     //console.log("🚀 ~ file: RequestDetails.js ~ line 26 ~ makeApp ~ const", fetchResult)
+    Toast.show('Appointment created', {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM
+    })
+    setTimeout(function () {
+      props.navigation.goBack()
+  }, 500);
   }
 
   const [availableHours, setAvailableHours] = useState([
     [{
       id: 1,
-      hour: "9",
-      isAvailable: true
+      hour: "8 am",
+      isAvailable: true,
+      isPressed: false
     },
     {
       id: 2,
-      hour: "10 am",
-      isAvailable: true
+      hour: "9 am",
+      isAvailable: true,
+      isPressed: false
     },
     {
       id: 3,
       hour: "11 am",
-      isAvailable: true
+      isAvailable: true,
+      isPressed: false
     },
     {
       id: 4,
       hour: "12 am",
-      isAvailable: true
+      isAvailable: true,
+      isPressed: false
     }],
     [{
-      id: 1,
+      id: 5,
       hour: "9",
-      isAvailable: true
+      isAvailable: true,
+      isPressed: false
     },
     {
-      id: 2,
+      id: 6,
       hour: "10 am",
       isAvailable: false
     },
     {
-      id: 3,
+      id: 7,
       hour: "11 am",
-      isAvailable: true
+      isAvailable: true,
+      isPressed: false
     },
     {
-      id: 4,
+      id: 8,
       hour: "12 am",
-      isAvailable: true
+      isAvailable: true,
+      isPressed: false
     },
     ],
     [{
-      id: 1,
+      id: 9,
       hour: "9",
-      isAvailable: true
+      isAvailable: true,
+      isPressed: false
     },
     {
-      id: 2,
+      id: 10,
       hour: "10 am",
-      isAvailable: true
+      isAvailable: true,
+      isPressed: false
     },
     {
-      id: 3,
+      id: 11,
       hour: "11 am",
-      isAvailable: true
+      isAvailable: true,
+      isPressed: false
     },
     {
-      id: 4,
+      id: 12,
       hour: "12 am",
-      isAvailable: true
+      isAvailable: true,
+      isPressed: false
     }],
     [
       {
-        id: 1,
+        id: 13,
         hour: "9",
-        isAvailable: true
+        isAvailable: true,
+        isPressed: false
       },
       {
-        id: 2,
+        id: 14,
         hour: "10 am",
-        isAvailable: true
+        isAvailable: true,
+        isPressed: false
       },
       {
-        id: 3,
+        id: 15,
         hour: "11 am",
-        isAvailable: true
+        isAvailable: true,
+        isPressed: false
       },
       {
-        id: 4,
+        id: 16,
         hour: "12 am",
-        isAvailable: true
+        isAvailable: true,
+        isPressed: false
       }]
   ])
 
@@ -129,9 +162,10 @@ const RequestDetails = () => {
         />
       </View>
       <View>
-        <Text style={styles.title}>Date</Text>
-
         <View style={styles.calendar}>
+          <View styles={styles.dateText}>
+            <Text style={styles.title}>Date</Text>
+          </View>
           <CalendarStrip
             style={styles.calendarContainer}
             calendarHeaderStyle={styles.calendarHeaderStyle}
@@ -144,18 +178,16 @@ const RequestDetails = () => {
             scrollable={true}
             onDateSelected={(date) => setPickupDate(date)}
           />
+
         </View>
       </View>
       <View style={styles.hourPicker}>
-        <Text>
-          Choose Time
-        </Text>
         <ScrollView horizontal={true} >
           {availableHours.map(hours => {
             return (
               <View>
                 {hours.map(hour => {
-                  return <TouchableOpacity style={styles.hour} key={hour.id} onPress={() => setHour(hour.hour)}>
+                  return <TouchableOpacity style={styles.hour} key={hour.id} onPress={() => setxHour(hour.id)}>
                     <Text>{hour.hour}</Text>
                   </TouchableOpacity>
                 })}
@@ -170,11 +202,11 @@ const RequestDetails = () => {
         >
           <View style={styles.appointment}>
             <Image
-              source={cityhall}
+              source={clock}
               style={{ width: 30, height: 30, color: 'white' }}
               resizeMode="contain"
             />
-            <Text style={{ color: 'black' }}>Create Appointment</Text>
+            <Text style={{ color: 'black' }}>   Create Appointment</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -190,14 +222,16 @@ const styles = StyleSheet.create({
     //marginTop: 60,
     //flex: 1,
     //alignItems: 'center',
-    //justifyContent: 'space-around'
+    justifyContent: 'space-beteween'
   },
   appointment: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   calendarContainer: {
-    height: 160,
-    paddingTop: 50,
+    height: 130,
+    //paddingTop: 50,
     paddingBottom: 10,
   },
   calendarHeaderStyle: {
@@ -214,9 +248,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.GREEN,
     borderRadius: 10,
     margin: 5,
-    //padding: 20,
-    width: 50,
-    height: 50
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 80,
+    height: 40
   },
   selectedDate: {
     color: colors.GREEN,
@@ -233,17 +268,26 @@ const styles = StyleSheet.create({
   },
   hourPicker: {
     //flex: 1,
+    top: 30,
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     //height: 60,
     //backgroundColor: 'black'
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around'
+    top: 30,
+    padding: 60
+   // justifyContent: 'space-around'
+  },
+  calendar: {
+    top: 20,
+    justifyContent: 'center'
   },
   title: {
     fontSize: 20,
     alignItems: 'flex-start'
+  },
+  dateText:{
+    justifyContent: 'flex-start'
   }
 })
