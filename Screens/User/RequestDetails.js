@@ -14,8 +14,15 @@ const RequestDetails = () => {
     console.log(date)
   }
 
-  const makeApp = () => {
-    console.log("here")
+  const makeApp = async () => {
+    const fetchResult = await fetch("http://localhost:3000", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({"email": "daraualexandru@gmail.com"})
+    });
+    //console.log("🚀 ~ file: RequestDetails.js ~ line 26 ~ makeApp ~ const", fetchResult)
   }
 
   const [availableHours, setAvailableHours] = useState([

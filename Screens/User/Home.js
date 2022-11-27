@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View, SafeAreaView, FlatList } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, Image } from 'react-native'
 import SimpleDocument from '../../Components/SimpleDocument'
 import React from 'react'
 import colors from '../../colors'
 import { useState } from 'react'
+import profilePicture from '../../icons/profile-picture.png'
 
 const Home = ({ navigation }) => {
     const [documents, setDocuments] = useState([
@@ -33,7 +34,10 @@ const Home = ({ navigation }) => {
                     <Text style={styles.title}>Hello, Aleps!</Text>
                     <Text style={styles.description}>What document you want to take today??</Text>
                 </View>
-                {/* <Image source={profile} style={styles.image} /> */}
+                <Image 
+                    style={styles.imageContainer}
+                    source={profilePicture}
+                />
             </View>
             <View style={styles.container}>
                 <Text style={styles.title}>Documents List</Text>
@@ -54,8 +58,9 @@ const styles = StyleSheet.create({
         flex: 5,
     },
     container: {
-        padding: 12,
+        padding: 20,
         flex: 4,
+        marginVertical: 20
         //justifyContent: 'space-around',
         //alignItems: 'space-around'
     },
@@ -66,13 +71,15 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     topViewContent: {
-        padding:12,
-        flex:1,
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'space-between',
         flexDirection: 'row',
-        marginTop: 1
+        justifyContent: 'space-around',
+        backgroundColor: colors.BLUE,
+        height: 100,
+        borderBottomLeftRadius: 25,
+        borderBottomRightRadius: 25,
+        padding: 20,
+        //marginVertical: 50,
+        display: 'flex',
     },
     title: {
         fontSize: 20,
