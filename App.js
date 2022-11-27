@@ -18,8 +18,13 @@ import AddFeedback from './Screens/User/AddFeedback';
 import AddDocument from './Screens/Admin/AddDocument';
 import ModifyDocument from './Screens/Admin/ModifyDocument';
 import ModifyAccount from './Screens/Admin/ModifyAccount';
+
+import ModifyInstitution from './Screens/Admin/ModifyInstitution';
+import AddInstitution from './Screens/Admin/AddInstitution';
+
 import Documents from './Screens/User/Documents'
 import Home from './Screens/User/Home'
+
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -27,7 +32,9 @@ export default function App() {
   return (
     <NavigationContainer backgroundColor={'red'}>
       <Stack.Navigator>
+
         <Stack.Screen options={{ headerShown: false }} name="User tab navigator" component={UserTabNavigator} />
+
         <Stack.Screen options={{ headerShown: false }} name="Splash screen" component={Splash} />
         <Stack.Screen options={{ headerShown: false }} name="Get started screen" component={GetStarted} />
         <Stack.Screen options={{ headerShown: false }} name="Login screen" component={Login} />
@@ -43,7 +50,12 @@ export default function App() {
         <Stack.Screen options={{ headerShown: false }} name="Add document screen" component={AddDocument} />
         <Stack.Screen options={{ headerShown: false }} name="Modify document screen" component={ModifyDocument} />
         <Stack.Screen options={{ headerShown: false }} name="Modify account screen" component={ModifyAccount} />
+
+        <Stack.Screen options={{ headerShown: false }} name="Add institution screen" component={AddInstitution} />
+        <Stack.Screen options={{ headerShown: false }} name="Modify institution screen" component={ModifyInstitution} />
+
         <Stack.Screen options={{ headerShown: false }} name="Documents" component={Documents} />
+
 
 
       </Stack.Navigator>
