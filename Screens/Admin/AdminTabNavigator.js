@@ -15,7 +15,7 @@ const Tab = createBottomTabNavigator();
 const AdminTabNavigator = () => {
     
     return (
-        <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: colors.TAB_COLOR }, headerShown: false }}  >
+        <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: colors.BLUE }, headerShown: false }}  >
             <Tab.Screen name="Documents" component={Documents} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
