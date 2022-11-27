@@ -39,7 +39,7 @@ const CreateRequest = (props) => {
             console.log("Appointment successfuly added");
         }).catch((error) => alert(error));
 
-        props.navigation.goBack();
+        props.navigation.navigate("Home");
     }
     function makeid(length) {
         var result = '';
