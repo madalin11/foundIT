@@ -1,13 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
-import Requests from './Requests';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Requests from './Requests';
 import ModifyProfile from '../ModifyProfile';
+import colors from '../../colors';
 
 const Tab = createBottomTabNavigator();
 
 const OperandTabNavigator = () => {
-    <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: 'rgba(0, 255, 0, 0.1)' }, headerShown: false }}  >
+
+    return (
+        <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: colors.BLUE }, headerShown: false }}  >
             <Tab.Screen name="Requests" component={Requests} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
@@ -21,6 +24,7 @@ const OperandTabNavigator = () => {
                         />
                     </View>
                 ),
+
             }}
             />
             <Tab.Screen name="Profile" component={ModifyProfile} options={{
@@ -36,10 +40,11 @@ const OperandTabNavigator = () => {
                         />
                     </View>
                 ),
+
             }}
             />
-            
         </Tab.Navigator>
+    )
 }
 
 export default OperandTabNavigator
