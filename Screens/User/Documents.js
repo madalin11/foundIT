@@ -4,13 +4,18 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import Login from '../Login'
 
-const Documents = ({navigation}) => {
+const Documents = (props) => {
+  console.log("🚀 ~ AAAAAA", props.route.params.name)
   const [ids, setIds] = useState(['123']) //ids from db
   const seeNecesarDocuments = () => {
-    navigation.navigate('Documents', {
-        id: ids
-    })
+    // navigation.navigate('Documents', {
+    //     id: ids
+    //})
+    
   }
+  const navigateMap = () => {
+    //props.navigation.navigate("Map")
+}
 
   const [documentData, setDocumentData] = useState([
     {
@@ -43,15 +48,16 @@ const Documents = ({navigation}) => {
       <Map
         location={documentData[0].location}
         documentName={documentData[0].name}
-        navigation ={navigation}
+        //navigation ={navigation}
         seeNecesarDocuments = {seeNecesarDocuments}
+        navigateMap = {navigateMap}
       />
     </View>
   );
 
   return (
     <SafeAreaView style={styles.blogScreen}>
-      <Text style={styles.title}>Lista documente</Text>
+      <Text style={styles.title}>Lista documente {props.route.params.name}</Text>
       <View style={styles.containerFlat}>
         <FlatList
           data={documentData}
@@ -68,6 +74,7 @@ export default Documents
 const styles = StyleSheet.create({
   blogScreen: {
     flex: 1,
+    padding: 12
   },
   container: {
     flex: 1,

@@ -14,7 +14,7 @@ const FeedbackUserCard = (props) => {
     return (
         <View style={styles.container}>
 
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={styles.cardContainer}>
                 <Image 
                     style={styles.imageContainer}
                     source={profilePicture}
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         shadowOffset: { height: 8 },
         shadowOpacity: 0.8,
         shadowRadius: 5,
-        alignItems: 'center',
+        alignItems: 'flex-start',
         borderColor: "black",
         borderWidth: 2,
         borderRadius: 20,
@@ -78,5 +78,11 @@ const styles = StyleSheet.create({
     commentContainer: {
         marginTop: 15,
         padding: 15
+    },
+    cardContainer:{
+        flexDirection: 'row', 
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+    
     }
 })

@@ -17,7 +17,7 @@ const Feedbacks = () => {
     {
       id: 1,
       profilePicture: dummyPicture,
-      name: "Stefan Hera",
+      name: "Stefan ",
       comment: "Nice documents mate.",
       givenStars: 4
     },
