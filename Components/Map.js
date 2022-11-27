@@ -21,7 +21,7 @@ const ASPECT_RATIO = width / height;
 export const Map = (props) => {
     const [location, setLocation] = useState(props.location);
     const [errorMsg, setErrorMsg] = useState(null);
-    const [region, setRegion] = useState({ latitude: 46.33015388445716, longitude: 22.119683962567226, latitudeDelta: 0.0022, longitudeDelta: 0.0922 * ASPECT_RATIO });
+    const [region, setRegion] = useState({ latitude: props.location.latitude, longitude: props.location.longitude, latitudeDelta: 0.0022, longitudeDelta: 0.0922 * ASPECT_RATIO });
 
     let text = 'Waiting..';
     if (errorMsg) {
@@ -30,24 +30,24 @@ export const Map = (props) => {
         text = JSON.stringify(location);
     }
 
-    // const navigateMap = async () => {
-    //     const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
-    //     const latLng = `${46.33188180294243},${22.11581192960193}`;
-    //     const label = 'Custom Label';
-    //     const url = Platform.select({
-    //         ios: `${scheme}${label}@${latLng}`,
-    //         android: `${scheme}${latLng}(${label})`
-    //     });
+    const navigateMap = async () => {
+        const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
+        const latLng = `${props.location.latitude},${props.location.longitude}`;
+        const label = 'Custom Label';
+        const url = Platform.select({
+            ios: `${scheme}${label}@${latLng}`,
+            android: `${scheme}${latLng}(${label})`
+        });
 
-    const navigateMap = () => {
-       //props.navigation.navigate("BigMap")
-    }
-
-    //     Linking.openURL(url);
+    // const navigateMap = () => {
+    //     props.navigation.navigate("BigMap")
     // }
 
+        Linking.openURL(url);
+    }
+
     const makeAnAppointment = () => {
-        //props.navigation.navigate("RequestsDetails")
+        props.navigation.navigate("Create request screen")
     }
 
 
@@ -56,16 +56,8 @@ export const Map = (props) => {
             <View style={styles.navigationContainer}>
                 <View style={styles.document}>
                     <Text style={styles.text}>{props.documentName}</Text>
+                    <Text style={styles.text}>{props.locationName}</Text>
                 </View>
-                <TouchableOpacity style={styles.overMapButton}
-                    onPress={navigateMap}
-                >
-                    <Image
-                        source={navigate}
-                        style={{ width: 30, height: 30, color: 'white' }}
-                        resizeMode="contain"
-                    />
-                </TouchableOpacity>
             </View>
             <MapView
                 provider={"google"}
@@ -73,11 +65,6 @@ export const Map = (props) => {
                 mapType={MAP_TYPES.SATELLITE}
                 initialRegion={region}
             >
-                {/* <Polyline
-                    coordinates={pickupPoints}
-                    strokeColor="#000" // fallback for when `strokeColors` is not supported by the map-provider
-                    strokeWidth={3}
-                /> */}
                 <View>
                     <Marker
                         coordinate={location}
@@ -94,18 +81,6 @@ export const Map = (props) => {
             </MapView>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.mapButton}
-                    onPress={() => { props.seeNecesarDocuments() }}
-                >
-                    <View style={styles.appointment}>
-                        <Image
-                            source={doc}
-                            style={{ width: 30, height: 30, color: 'white' }}
-                            resizeMode="contain"
-                        />
-                        <Text style={{ color: 'black' }}> Documents</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.mapButton}
                     onPress={makeAnAppointment}
                 >
                     <View style={styles.appointment}>
@@ -117,8 +92,20 @@ export const Map = (props) => {
                         <Text style={{ color: 'black' }}> Appointment</Text>
                     </View>
                 </TouchableOpacity>
-            </View>
-        </View>
+                <TouchableOpacity style={styles.mapButton}
+                    onPress={navigateMap}
+                >
+                    <View style={styles.appointment}>
+                        <Image
+                            source={navigate}
+                            style={{ width: 30, height: 30, color: 'white' }}
+                            resizeMode="contain"
+                        />
+                        <Text style={{ color: 'black' }}> Navigate</Text>
+                    </View>
+                </TouchableOpacity>
+            </View >
+        </View >
     )
 }
 
@@ -129,6 +116,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     mapContainer: {
+        backgroundColor: colors.TAB_COLOR,
         height: 200,
         //flexDirection: 'column',
         overflow: "hidden",
@@ -146,13 +134,13 @@ const styles = StyleSheet.create({
         margin: 5,
         //alignItems: 'center',
         justifyContent: 'center',
-        height: 30,
+        height: 40,
         borderRadius: 15,
         padding: 5
     },
     overMapButton: {
         alignItems: 'flex-end',
-        padding: 2
+        margin: 10
     },
     buttonContainer: {
         flexDirection: 'row',
@@ -164,7 +152,8 @@ const styles = StyleSheet.create({
 
     },
     document: {
-        backgroundColor: colors.GREEN,
+        // backgroundColor: colors.GREEN,
+        flexDirection: 'row',
         margin: 3,
         borderRadius: 10,
         justifyContent: 'center'
@@ -173,13 +162,13 @@ const styles = StyleSheet.create({
     },
     text: {
         color: colors.PURPLE_TRANSPARENT,
-        fontSize: 16,
+        fontSize: 18,
         textAlign: 'center',
         margin: 5
     },
     appointment: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        //justifyContent: 'space-around',
         alignItems: 'center',
     }
 

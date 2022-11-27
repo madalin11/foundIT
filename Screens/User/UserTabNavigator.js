@@ -4,17 +4,18 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './Home';
 import Search from './Search';
 import Navigation from '../../Components/Map';
-import RequestsDetails from './RequestDetails';
+import Requests from './Requests';
 import Feedbacks from './Feedbacks';
 import BigMap from './BigMap';
 import ModifyProfile from '../ModifyProfile';
+import colors from '../../colors';
 
 const Tab = createBottomTabNavigator();
 
 const UserTabNavigator = () => {
 
     return (
-        <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: 'rgba(0, 255, 0, 0.1)' }, headerShown: false }}  >
+        <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: colors.BLUE }, headerShown: false }}  >
             <Tab.Screen name="Home" component={Home} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
@@ -31,7 +32,7 @@ const UserTabNavigator = () => {
 
             }}
             />
-            <Tab.Screen name="RequestsDetails" component={RequestsDetails} options={{
+            <Tab.Screen name="Requests" component={Requests} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
                         <Image

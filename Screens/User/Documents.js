@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, SafeAreaView } from 'react-native'
+import { StyleSheet, Text, View, FlatList, SafeAreaView, ToastAndroid } from 'react-native'
 import { Map } from "../../Components/Map"
 import React from 'react'
 import { useState, useEffect } from 'react';
@@ -6,21 +6,22 @@ import Login from '../Login'
 
 const Documents = (props) => {
   console.log("🚀 ~ AAAAAA", props.route.params.name)
+  console.log(props.navigation)
   const [ids, setIds] = useState(['123']) //ids from db
   const seeNecesarDocuments = () => {
     // navigation.navigate('Documents', {
     //     id: ids
     //})
-    
   }
   const navigateMap = () => {
-    //props.navigation.navigate("Map")
+    props.navigation.navigate("BigMap")
 }
 
   const [documentData, setDocumentData] = useState([
     {
       id: 1,
-      name: "certificat",
+      name: "Document 1",
+      locationName: "City Hall",
       location:
       {
         latitude: 46.33188180294243,
@@ -29,26 +30,38 @@ const Documents = (props) => {
     },
     {
       id: 2,
-      name: "certificat",
+      name: "Document 2",
+      locationName: "City Hall",
+      location:
+      { 
+        latitude: 45.7392503641402,
+        longitude: 21.231844165573836
+      }
+    },
+    {
+      id: 3,
+      name: "Documnet 3",
+      locationName: "City Hall",
       location:
       {
         latitude: 46.33188180294243,
         longitude: 22.11581192960193
       }
-    }
+    },
   ])
 
   const renderItem = ({ item }) => (
-    <Item name={item.name} location={item.location} />
+    <Item name={item.name} location={item.location} locationName={item.locationName} />
   );
 
-  const Item = ({ name }) => (
+  const Item = ({ name, location, locationName}) => (
 
     <View style={styles.item}>
       <Map
-        location={documentData[0].location}
-        documentName={documentData[0].name}
-        //navigation ={navigation}
+        location={location}
+        documentName={name}
+        locationName={locationName}
+        navigation ={props.navigation}
         seeNecesarDocuments = {seeNecesarDocuments}
         navigateMap = {navigateMap}
       />
@@ -57,7 +70,7 @@ const Documents = (props) => {
 
   return (
     <SafeAreaView style={styles.blogScreen}>
-      <Text style={styles.title}>Lista documente {props.route.params.name}</Text>
+      <Text style={styles.title}>{props.route.params.name}</Text>
       <View style={styles.containerFlat}>
         <FlatList
           data={documentData}
@@ -95,7 +108,7 @@ const styles = StyleSheet.create({
     //marginHorizontal: 10,
     marginTop: 10,
     //borderRadius: 15,
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: 'black',
   },
   title: {
