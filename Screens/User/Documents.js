@@ -3,76 +3,66 @@ import { Map } from "../../Components/Map"
 import React from 'react'
 import { useState, useEffect } from 'react';
 import Login from '../Login'
+import { auth, db } from '../../firebase'
 
 const Documents = (props) => {
   console.log("🚀 ~ AAAAAA", props.route.params.name)
   console.log(props.navigation)
-  const [ids, setIds] = useState(['123']) //ids from db
+  const [ids, setIds] = useState(props?.route?.params?.name?.documentsIds) //ids from db
   const seeNecesarDocuments = () => {
     // navigation.navigate('Documents', {
     //     id: ids
     //})
   }
+  useEffect(() => {
+    const unsubscribe = db
+      .collection("documents")
+      .onSnapshot(snapshot => {
+        setDocumentData(
+          snapshot.docs.filter((elm) => (
+            ids?.indexOf(elm.id) !== -1)
+          ).map((doc) => ({
+            id: doc.id,
+            data: doc.data()
+          })))
+      }
+      )
+    return unsubscribe;
+  }, [db])
   const navigateMap = () => {
     props.navigation.navigate("BigMap")
-}
+  }
 
-  const [documentData, setDocumentData] = useState([
-    {
-      id: 1,
-      name: "Document 1",
-      locationName: "City Hall",
-      location:
-      {
-        latitude: 46.33188180294243,
-        longitude: 22.11581192960193
-      }
-    },
-    {
-      id: 2,
-      name: "Document 2",
-      locationName: "City Hall",
-      location:
-      { 
-        latitude: 45.7392503641402,
-        longitude: 21.231844165573836
-      }
-    },
-    {
-      id: 3,
-      name: "Documnet 3",
-      locationName: "City Hall",
-      location:
-      {
-        latitude: 46.33188180294243,
-        longitude: 22.11581192960193
-      }
-    },
-  ])
+  const [documentData, setDocumentData] = useState([]);
 
   const renderItem = ({ item }) => (
-    <Item name={item.name} location={item.location} locationName={item.locationName} />
+    <Item name={item.data.name}  location={item.data.institutionCoord} locationName={item.data.chosenInstitution} docId={item.id}/>
   );
 
-  const Item = ({ name, location, locationName}) => (
+  const Item = ({ name, location, locationName , docId }) => (
 
     <View style={styles.item}>
       <Map
         location={location}
         documentName={name}
         locationName={locationName}
-        navigation ={props.navigation}
-        seeNecesarDocuments = {seeNecesarDocuments}
-        navigateMap = {navigateMap}
+        navigation={props.navigation}
+        docId={docId}
+        seeNecesarDocuments={seeNecesarDocuments}
+        navigateMap={navigateMap}
       />
     </View>
   );
 
   return (
     <SafeAreaView style={styles.blogScreen}>
-      <Text style={styles.title}>{props.route.params.name}</Text>
+      <View style={{ marginTop: 40, marginBottom: 20, alignItems: 'center', alignSelf: 'center' }}>
+        <Text style={styles.titleTextStyle}>
+          Document: {props?.route.params.name}
+        </Text>
+      </View>
       <View style={styles.containerFlat}>
-        <FlatList
+        <FlatList style={{ height: '100%' }}
           data={documentData}
           renderItem={renderItem}
           keyExtractor={item => item.id}
@@ -87,7 +77,7 @@ export default Documents
 const styles = StyleSheet.create({
   blogScreen: {
     flex: 1,
-    padding: 12
+   
   },
   container: {
     flex: 1,
@@ -113,5 +103,17 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-  }
+  },
+  titleTextStyle: {
+    fontFamily: 'Times New Roman',
+    fontSize: 34,
+    fontWeight: 'bold',
+    color: 'white',
+    shadowColor: '#202020',
+    shadowOffset: { height: 3 },
+    shadowOpacity: 1,
+
+
+
+},
 })

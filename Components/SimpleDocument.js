@@ -5,7 +5,7 @@ import doc from '../assets/doc.png'
 
 
 const SimpleDocument = (props) => {
-
+    console.log(props)
     const { document } = props;
     const doIt = (navigation) => {
         navigation.navigate("Documents", {
@@ -17,7 +17,7 @@ const SimpleDocument = (props) => {
             <TouchableOpacity style={styles.button} onPress={() => doIt(props.navigation)}>
                 <View style={styles.item}>
                     <Image
-                        source={doc}
+                        source={props?.imageLink}
                         style={{ width: 30, height: 30, color: 'white', marginRight: 15 }}
                         resizeMode="contain"
                     />
@@ -37,11 +37,12 @@ const styles = StyleSheet.create({
         //padding: 20,
         width: '100%',
         marginVertical: 2,
-        marginHorizontal: 10,
-        marginTop: 10,
+        marginHorizontal: 0,
+        marginTop: 5,
     },
     text: {
-        fontSize: 20
+        fontSize: 20,
+        alignSelf:'flex-start'
     },
     button: {
         flexDirection: 'row',

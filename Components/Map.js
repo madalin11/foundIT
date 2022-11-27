@@ -21,7 +21,7 @@ const ASPECT_RATIO = width / height;
 export const Map = (props) => {
     const [location, setLocation] = useState(props.location);
     const [errorMsg, setErrorMsg] = useState(null);
-    const [region, setRegion] = useState({ latitude: props.location.latitude, longitude: props.location.longitude, latitudeDelta: 0.0022, longitudeDelta: 0.0922 * ASPECT_RATIO });
+    const [region, setRegion] = useState({ latitude: props.location.x, longitude: props.location.y, latitudeDelta: 0.0022, longitudeDelta: 0.0922 * ASPECT_RATIO });
 
     let text = 'Waiting..';
     if (errorMsg) {
@@ -32,22 +32,27 @@ export const Map = (props) => {
 
     const navigateMap = async () => {
         const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
-        const latLng = `${props.location.latitude},${props.location.longitude}`;
+        const latLng = `${props.location.x},${props.location.y}`;
         const label = 'Custom Label';
         const url = Platform.select({
             ios: `${scheme}${label}@${latLng}`,
             android: `${scheme}${latLng}(${label})`
         });
 
-    // const navigateMap = () => {
-    //     props.navigation.navigate("BigMap")
-    // }
+        // const navigateMap = () => {
+        //     props.navigation.navigate("BigMap")
+        // }
 
         Linking.openURL(url);
     }
 
     const makeAnAppointment = () => {
-        props.navigation.navigate("Create request screen")
+        props.navigation.navigate("Create request screen", {
+            institutionName: props?.locationName,
+            docId : props?.docId,
+            documentName: props?.documentName
+        }
+        )
     }
 
 
@@ -64,10 +69,12 @@ export const Map = (props) => {
                 style={styles.map}
                 mapType={MAP_TYPES.SATELLITE}
                 initialRegion={region}
+                scrollEnabled={false}
+                
             >
                 <View>
                     <Marker
-                        coordinate={location}
+                        coordinate={{ longitude: location.y, latitude: location.x }}
                         pinColor='#339A3E'
                     //image={cityhall}
                     >

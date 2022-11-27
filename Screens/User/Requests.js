@@ -1,65 +1,53 @@
 import { StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import RequestComponent from '../../Components/RequestComponent';
+import {auth,db} from '../../firebase'
 
 
 const Requests = ({ navigation }) => {
 
-  const [requests, setRequest] = useState([
-    {
-      id: 1,
-      documentName: "ID Card",
-      institutionName: "city hall",
-      day: 12,
-      mounth: 12,
-      year: 2010,
-      hour: 16,
-      minutes: 30,
-      status: "Accepted"
-    },
-    {
-      id: 2,
-      documentName: "ID Card",
-      institutionName: "city hall",
-      day: 12,
-      mounth: 12,
-      year: 2010,
-      hour: 16,
-      minutes: 30,
-      status: "Rejected"
-    }
-  ])
-
+    const [userUid, setUserUid] = useState(auth?.currentUser.uid);
+    useEffect(() => {
+        const unsubscribe = db
+          .collection("appointments")
+          .onSnapshot(snapshot => {
+            setRequest(
+              snapshot.docs.filter((elm) => (
+                elm.data().userId === userUid)
+              ).map((doc) => ({
+                id: doc.id,
+                data: doc.data()
+              })))
+          }
+          )
+        return unsubscribe;
+      }, [db])
+  const [requests, setRequest] = useState([])
   return (
 
 
     <SafeAreaView>
       <View style={styles.container}>
       <Text style={styles.titleContainer}>Requests</Text>
-        <ScrollView>
+        <ScrollView style={{height:'100%',marginTop:40}}>
           {requests.map((item) => {
             return <RequestComponent
               key={item.id}
-              docName={item.documentName}
-              institutionName={item.institutionName}
+              docName={item.data.documentName}
+              institutionName={item.data.institution}
               id={item.id}
-              day={item.day}
-              mounth={item.mounth}
-              year={item.year}
-              hour={item.hour}
-              minutes={item.minutes}
-              status={item.status}
+              day={23}
+              mounth={11}
+              year={new Date(item.data.date.seconds).getUTCFullYear()+52}
+              hour={item.data.hour}
+              minutes={''}
+              status={item.data.status}
             />
           })}
 
 
         </ScrollView>
-        <TouchableOpacity
-          raised onPress={() => navigation.navigate("Create request screen")}
-        >
-          <Image source={require('../../assets/create.png')} style={{ alignSelf: 'flex-end', width: 70, height: 70, marginTop: -30, marginRight: 15 }} />
-        </TouchableOpacity>
       </View>
     </SafeAreaView>
   )

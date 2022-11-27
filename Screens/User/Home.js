@@ -1,21 +1,48 @@
-import { StyleSheet, Text, View, SafeAreaView, Image } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView } from 'react-native'
 import SimpleDocument from '../../Components/SimpleDocument'
 import React from 'react'
 import colors from '../../colors'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import profilePicture from '../../icons/profile-picture.png'
+import {db,auth} from '../../firebase'
 
 const Home = ({ navigation }) => {
-    const [documents, setDocuments] = useState([
-        {
-            id: 1,
-            name: "Birth certificate"
-        },
-        {
-            id: 2,
-            name: "Mariage certificate"
-        }
-    ])
+    const [searchText, setSearchText] = useState('');
+  const [documents, setDocuments] = useState([]);
+  useEffect(() => {
+    const unsubscribe = db
+      .collection("documents")
+      .onSnapshot(snapshot => {
+        setDocuments(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data()
+          })))
+      }
+      )
+    return unsubscribe;
+  }, [db])
+
+  function filterZZZ(element) {
+    try {
+      if (element.data.name == '') {
+        return false;
+      }
+      try {
+
+        if (element.data.name.toLowerCase().includes(searchText.toLowerCase()))
+          return true;
+
+      } catch (err) {
+
+      }
+      return false
+    } catch (err) {
+
+    }
+    return true
+  }
+
     const renderItem = ({ item }) => (
         <Item />
     );
@@ -42,11 +69,13 @@ const Home = ({ navigation }) => {
             </View>
             <View style={styles.container}>
                 <Text style={styles.title}>Documents List</Text>
-                <View style={styles.containerFlat}>
-                    {documents.map((doc) => {
-                        return <SimpleDocument key={doc.id} document={doc.name} navigation={navigation} />
-                    })}
-                </View>
+                <ScrollView style={{height:'100%'}}>
+                    <View style={styles.containerFlat}>
+                        {documents.map(({id,data:{name,chosenInstitution,documentsIds,imageLink,institutionCoord,price}}) => {
+                            return <SimpleDocument key={id} document={name} documentsIds={documentsIds} navigation={navigation} imageLink={imageLink} chosenInstitution={chosenInstitution} institutionCoord={institutionCoord} price={price}/>
+                        })}
+                    </View>
+                </ScrollView>
             </View>
         </SafeAreaView>
     )
@@ -59,9 +88,9 @@ const styles = StyleSheet.create({
         flex: 5,
     },
     container: {
-        padding: 20,
+        
         flex: 4,
-       // marginVertical: 20,
+        // marginVertical: 20,
         backgroundColor: colors.BEIGE,
         //justifyContent: 'space-around',
         //alignItems: 'space-around'
