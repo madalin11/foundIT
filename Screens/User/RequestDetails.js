@@ -24,7 +24,9 @@ const RequestDetails = (props) => {
     const body = {
       email: "daraualexandru@gmail.com",
       hour: hour,
-      date: date
+      date: date,
+      username: "Alex",
+      institution: "City Hall"
     }
     const fetchResult = await fetch("http://localhost:3000", {
       method: 'POST',
@@ -59,13 +61,13 @@ const RequestDetails = (props) => {
     {
       id: 3,
       hour: "11 am",
-      isAvailable: true,
+      isAvailable: false,
       isPressed: false
     },
     {
       id: 4,
       hour: "12 am",
-      isAvailable: true,
+      isAvailable: false,
       isPressed: false
     }],
     [{
@@ -151,15 +153,17 @@ const RequestDetails = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.titleContainer}>
       <View>
         <Text style={styles.title}>Institution: City Hall</Text>
       </View>
       <View>
         <Image
           source={cityhall}
-          style={{ width: "100%", height: 200 }}
+          style={{ width: 428, height: 200 }}
           resizeMode="contain"
         />
+      </View>
       </View>
       <View>
         <View style={styles.calendar}>
@@ -187,7 +191,7 @@ const RequestDetails = (props) => {
             return (
               <View>
                 {hours.map(hour => {
-                  return <TouchableOpacity style={styles.hour} key={hour.id} onPress={() => setxHour(hour.id)}>
+                  return <TouchableOpacity style={[styles.hour, {backgroundColor: hour.isAvailable ?  'green': 'red'}]} key={hour.id} onPress={() => setxHour(hour.id)}>
                     <Text>{hour.hour}</Text>
                   </TouchableOpacity>
                 })}
@@ -220,9 +224,14 @@ const styles = StyleSheet.create({
   container: {
     padding: 12,
     //marginTop: 60,
-    //flex: 1,
+    flex: 6,
     //alignItems: 'center',
     justifyContent: 'space-beteween'
+  },
+  titleContainer:{
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   appointment: {
     flexDirection: 'row',

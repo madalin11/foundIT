@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 app.post('/', async (req, res) => {
     
-    const { email, hour, date } = req.body;
+    const { email, hour, date, username, institution} = req.body;
     console.log("🚀 ~ file: index.js ~ line 22 ~ app.post ~ email", email)
 
     const transporter = nodemailer.createTransport({
@@ -32,8 +32,8 @@ app.post('/', async (req, res) => {
     const message = {
         from: "services_foundit@outlook.com",
         to: email,
-        subject: "Test mail for Unihack 4th Edition 2022" + hour + date,
-        text: "This mail was MEAGA MEGA a full success!"
+        subject: "Appointment confirmation",
+        text: `Hello dear ${username}! \n Your appointment for institution ${institution} was confirmed for day ${date} at hour ${hour}`
     }
 
     const info = await transporter.sendMail(message);

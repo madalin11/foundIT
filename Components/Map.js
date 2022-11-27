@@ -47,7 +47,7 @@ export const Map = (props) => {
     }
 
     const makeAnAppointment = () => {
-        props.navigation.navigate("RequestsDetails")
+        props.navigation.navigate("Create request screen")
     }
 
 
