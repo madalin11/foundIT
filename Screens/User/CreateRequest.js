@@ -239,7 +239,7 @@ const CreateRequest = (props) => {
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.mapButton}
-                    onPress={addAppointment && makeApp} //
+                    onPress={()=>{addAppointment();  makeApp()} } //
                 >
                     <View style={styles.appointment}>
                         <Image
