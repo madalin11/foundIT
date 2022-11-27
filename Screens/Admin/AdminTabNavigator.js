@@ -16,7 +16,7 @@ const AdminTabNavigator = () => {
     
     return (
         <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: colors.TAB_COLOR }, headerShown: false }}  >
-            <Tab.Screen name="Documents" component={Documents} options={{
+            <Tab.Screen name="Documents admin" component={Documents} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
                         <Image
