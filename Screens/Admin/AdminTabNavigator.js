@@ -15,7 +15,7 @@ const Tab = createBottomTabNavigator();
 const AdminTabNavigator = () => {
     
     return (
-        <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: colors.TAB_COLOR }, headerShown: false }}  >
+        <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: colors.BLUE }, headerShown: false }}  >
             <Tab.Screen name="Documents admin" component={Documents} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
@@ -65,11 +65,11 @@ const AdminTabNavigator = () => {
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
                         <Image
-                            source={require('../../icons/feedback.png')}
+                            source={require('../../assets/feedback1.png')}
                             resizeMode='contain'
                             style={{
-                                width: 26,
-                                height: 26,
+                                width: 34,
+                                height: 34,
                             }}
                         />
                     </View>

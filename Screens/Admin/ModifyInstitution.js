@@ -41,7 +41,7 @@ const ModifyInstitution = ({ navigation, route }) => {
 
                 <LinearGradient
                     // Background Linear Gradient
-                    colors={[colors.TAB_COLOR, colors.TAB_COLOR, 'white']}
+                    colors={[colors.BLUE, colors.TAB_COLOR, 'white']}
                     style={styles.background}
                 />
 

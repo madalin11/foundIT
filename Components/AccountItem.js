@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
+import colors from '../colors'
 
 
 const AccountItem = ({ enterAccount, name, id, photoUrl, phoneNumber, deleteAccount }) => {
@@ -34,17 +35,17 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         borderRadius: 10,
-        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+        backgroundColor: colors.BEIGE,
         marginVertical: 2,
         marginHorizontal: 5,
         paddingHorizontal: 10,
         flexDirection: 'row',
         alignItems: 'center',
         paddingVertical: 5,
-        shadowColor: '#202020',
-        shadowOffset: { height: 5 },
-        shadowOpacity: 0.8,
-        shadowRadius: 20
+        // shadowColor: '#202020',
+        // shadowOffset: { height: 5 },
+        // shadowOpacity: 0.8,
+        // shadowRadius: 20
 
     },
     treatmName: {

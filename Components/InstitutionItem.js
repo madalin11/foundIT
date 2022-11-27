@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: colors.GRAY_COLOR,
+        backgroundColor: colors.BEIGE,
         marginHorizontal:0
     },
     text: {
