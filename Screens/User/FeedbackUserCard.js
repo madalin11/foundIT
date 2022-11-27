@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import profilePicture from "../../icons/profile-picture.png"
 import emptyStar from "../../icons/empty-star.png"
 import filledStar from "../../icons/filled-star.png"
+import colors from '../../colors'
 
 const FeedbackUserCard = (props) => {
 
@@ -44,16 +45,16 @@ export default FeedbackUserCard
 
 const styles = StyleSheet.create({
     container: {
-        shadowColor: '#202020',
-        shadowOffset: { height: 8 },
-        shadowOpacity: 0.8,
-        shadowRadius: 5,
+        // shadowColor: '#202020',
+        // shadowOffset: { height: 8 },
+        // shadowOpacity: 0.8,
+        // shadowRadius: 5,
         alignItems: 'flex-start',
         borderColor: "black",
         borderWidth: 2,
         borderRadius: 20,
         padding: 15,
-        backgroundColor: "lightgreen",
+        backgroundColor: colors.BLUE,
         marginTop: 20
     },
     nameContainer: {

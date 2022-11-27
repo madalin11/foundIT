@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
+import colors from '../colors'
 
 
 
@@ -7,7 +8,8 @@ const RequestComponent = ({ docName, institutionName, id, day, mounth, year, hou
 
     return (
         <View key={id} style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.5)',
+            backgroundColor: colors.BEIGE,
+            marginVertical: 10,
         }}>
             <View style={styles.container}>
 
@@ -80,7 +82,7 @@ export default RequestComponent
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: colors.BLUE,
         marginHorizontal: 5,
         paddingHorizontal: 10,
         flexDirection: 'row',

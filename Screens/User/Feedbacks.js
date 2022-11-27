@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     justifyContent: "flex-start",
     height: 40,
-    width: 200,
+    width: "90%",
     borderRadius: 10,
     paddingLeft: 10,
     borderColor: 'black',

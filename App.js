@@ -24,6 +24,7 @@ import AddInstitution from './Screens/Admin/AddInstitution';
 
 import Documents from './Screens/User/Documents'
 import Home from './Screens/User/Home'
+import RequestsDetails from './Screens/User/RequestDetails'
 
 
 export default function App() {
@@ -42,7 +43,7 @@ export default function App() {
         <Stack.Screen options={{ headerShown: false }} name="Admin tab navigator" component={AdminTabNavigator} />
         <Stack.Screen options={{ headerShown: false }} name="Operand tab navigator" component={OperandTabNavigator} />
         <Stack.Screen options={{ headerShown: false }} name="User Home" component={Home} />
-        <Stack.Screen options={{ headerShown: false }} name="BigMap" component={BigMap} />
+        <Stack.Screen options={{ headerShown: false }} name="RequestsDetails" component={RequestsDetails} />
         <Stack.Screen options={{ headerShown: false }} name="Document details screen" component={DocumentDetails} />
         <Stack.Screen options={{ headerShown: false }} name="Create request screen" component={CreateRequest} />
         <Stack.Screen options={{ headerShown: false }} name="Request details screen" component={RequestDetails} />
