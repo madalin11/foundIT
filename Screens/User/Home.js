@@ -32,7 +32,7 @@ const Home = ({ navigation }) => {
             <View style={styles.topViewContent}>
                 <View style={styles.nameContainer}>
                     <Text style={styles.title}>Hello, Aleps!</Text>
-                    <Text style={styles.description}>What document you want to take today??</Text>
+                    <Text style={styles.description}>What document you want to search?</Text>
                 </View>
                 <View style={styles.imageContainer}>
                     <Image
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     nameContainer: {
-        justifyContent: 'center'
+        justifyContent: 'space-around'
     },
     imageContainer: {
         justifyContent: 'center',

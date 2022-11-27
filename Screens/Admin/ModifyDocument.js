@@ -248,7 +248,7 @@ const ModifyDocument = ({ navigation, route }) => {
                     }}>
                         <TouchableOpacity onPress={() => updateDocument(route?.params?.id)} >
                             <View style={{
-                                backgroundColor: 'rgba(255, 255, 255, 0.5)', padding: 10, paddingHorizontal: 40, marginHorizontal: 50, borderRadius: 10, shadowColor: '#202020',
+                                backgroundColor: colors.BLUE, padding: 10, paddingHorizontal: 40, marginHorizontal: 50, borderRadius: 10, shadowColor: '#202020',
                                 shadowRadius: 10,
                                 shadowOpacity: 0.6,
                                 shadowOffset: { width: 0, height: 10 }
