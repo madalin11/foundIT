@@ -64,7 +64,7 @@ const Documents = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <LinearGradient
-        colors={[colors.TAB_COLOR, 'white', 'white']}
+        colors={[colors.BLUE, 'white', 'white']}
         style={styles.background}
       />
       <SafeAreaView style={{ alignContent: 'center', alignItems: 'flex-end', marginRight: 30, marginTop: 60 }}>
@@ -91,7 +91,7 @@ const Documents = ({ navigation }) => {
 
         <TouchableOpacity style={{ flex: 1, alignSelf: 'flex-end', bottom: 45, right: 42 }} onPress={Keyboard.dismiss}>
           {Platform.OS != 'web' ?
-            <LottieView style={styles.animation} source={require("../../icons/search.json")} autoPlay loop />
+            <LottieView style={styles.animation} source={require("../../icons/search.json")} />
             : null}
         </TouchableOpacity>
 
@@ -130,9 +130,9 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: 'bold',
     shadowColor: '#202020',
-    shadowOpacity: 1,
-    shadowRadius: 2,
-    shadowOffset: { height: 3 }
+    // shadowOpacity: 1,
+    // shadowRadius: 2,
+    //shadowOffset: { height: 3 }
   },
   background: {
     position: 'absolute',

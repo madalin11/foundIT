@@ -34,11 +34,12 @@ export default function App() {
     <NavigationContainer backgroundColor={'red'}>
       <Stack.Navigator>
 
+      <Stack.Screen options={{ headerShown: false }} name="Admin tab navigator" component={AdminTabNavigator} />
+
         <Stack.Screen options={{ headerShown: false }} name="Splash screen" component={Splash} />
         <Stack.Screen options={{ headerShown: false }} name="Get started screen" component={GetStarted} />
         <Stack.Screen options={{ headerShown: false }} name="Login screen" component={Login} />
         <Stack.Screen options={{ headerShown: false }} name="Register screen" component={Register} />
-        <Stack.Screen options={{ headerShown: false }} name="Admin tab navigator" component={AdminTabNavigator} />
         <Stack.Screen options={{ headerShown: false }} name="Operand tab navigator" component={OperandTabNavigator} />
         <Stack.Screen options={{ headerShown: false }} name="User Home" component={Home} />
         <Stack.Screen options={{ headerShown: false }} name="RequestsDetails" component={RequestsDetails} />
