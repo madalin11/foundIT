@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { auth } from './firebase';
-import  Login  from './Screens/Login';
-import  Register from './Screens/Register';
+import Login from './Screens/Login';
+import Register from './Screens/Register';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AdminTabNavigator from './Screens/Admin/AdminTabNavigator';
@@ -17,13 +17,15 @@ import AddFeedback from './Screens/User/AddFeedback';
 import AddDocument from './Screens/Admin/AddDocument';
 import ModifyDocument from './Screens/Admin/ModifyDocument';
 import ModifyAccount from './Screens/Admin/ModifyAccount';
+import ModifyInstitution from './Screens/Admin/ModifyInstitution';
+import AddInstitution from './Screens/Admin/AddInstitution';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
     <NavigationContainer backgroundColor={'red'}>
-      <Stack.Navigator> 
+      <Stack.Navigator>
         <Stack.Screen options={{ headerShown: false }} name="Splash screen" component={Splash} />
         <Stack.Screen options={{ headerShown: false }} name="Get started screen" component={GetStarted} />
         <Stack.Screen options={{ headerShown: false }} name="Login screen" component={Login} />
@@ -38,8 +40,10 @@ export default function App() {
         <Stack.Screen options={{ headerShown: false }} name="Add document screen" component={AddDocument} />
         <Stack.Screen options={{ headerShown: false }} name="Modify document screen" component={ModifyDocument} />
         <Stack.Screen options={{ headerShown: false }} name="Modify account screen" component={ModifyAccount} />
-      
-      
+        <Stack.Screen options={{ headerShown: false }} name="Add institution screen" component={AddInstitution} />
+        <Stack.Screen options={{ headerShown: false }} name="Modify institution screen" component={ModifyInstitution} />
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -6,48 +6,31 @@ import colors from '../../colors'
 import SelectDropdown from 'react-native-select-dropdown';
 import RequirementsDocsItem from '../../Components/RequirementsDocsItem';
 
-const AddDocument = ({ navigation,route }) => {
+const AddInstitution = ({ navigation,route }) => {
 
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [price, setPrice] = useState('');
-    const [linkImage, setLinkImage] = useState('')
-    const [chosenDocs, setChosenDocs] = useState([])
-    const [chosenInstitution, setChosenInstitution] = useState('Primarie')
-    const [institutions, setInstitutions] = useState([])
-
-
+    const [name, setName] = useState(route?.params?.name);
+    const [description, setDescription] = useState(route?.params?.description);
+    const [linkImage, setLinkImage] = useState(route?.params?.linkImage);
     const scrollViewRef = useRef();
-    const [documents, setDocuments] = useState([]);
-    useEffect(() => {
-        const unsubscribe = db
-            .collection("documents")
-            .onSnapshot(snapshot => {
-                setDocuments(
-                    snapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        data: doc.data()
-                    })))
-            }
-            )
-        return unsubscribe;
-    }, [db])
 
-   const deleteInheriteDocs = (id) => {
-        setChosenDocs(chosenDocs.filter((elm)=>elm?.id !== id));
-        console.log(chosenDocs);
-   }
+    function deleteInstitution(id) {
+        db.collection("institutions").doc(id).delete().then(() => {
+            console.log("institutions successfuly deleted");
+        }).catch((error) => alert(error));
+        navigation.goBack();
+    }
 
-    async function addDocument(id) {
-        await db.collection("documents").doc(makeid(10)).set({
+    async function addInstitution(id) {
+        await db.collection("institutions").doc(makeid(10)).set({
             name: name,
             description: description,
-            price: price,
-            imageLink: linkImage || "https://thumbs.dreamstime.com/z/document-icon-vector-stack-paper-sheets-illustration-131104983.jpg",
-            documentsIds: chosenDocs.map(({id,data})=>id),
-            chosenInstitution: chosenInstitution
+            imageLink: linkImage || "https://i.pinimg.com/564x/a2/5e/ed/a25eedd6c812b3873e614fa8b6e69c8b.jpg",
+            coordonate: {
+                x : 2,
+                y: 3
+            }
         }).then(() => {
-            console.log("Document successfuly added");
+            console.log("Institution successfuly added");
         }).catch((error) => alert(error));
 
         navigation.goBack();
@@ -62,19 +45,6 @@ const AddDocument = ({ navigation,route }) => {
         }
         return result;
     }
-    useEffect(() => {
-        const unsubscribe = db
-            .collection("institutions")
-            .onSnapshot(snapshot => {
-                setInstitutions(
-                    snapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        data: doc.data()
-                    })))
-            }
-            )
-        return unsubscribe;
-    }, [db])
     return (
         <KeyboardAvoidingView
             style={styles.container}
@@ -91,7 +61,7 @@ const AddDocument = ({ navigation,route }) => {
                     style={styles.background}
                 />
                 <View>
-                    <TouchableOpacity style={{ marginTop: 60, marginLeft: 15, marginRight: -15 }} onPress={() => navigation.navigate('Documents')}>
+                    <TouchableOpacity style={{ marginTop: 60, marginLeft: 15, marginRight: -15 }} onPress={() => navigation.navigate('Institutions')}>
                         <Image
                             style={{ alignSelf: 'flex-start', width: 22, height: 22 }}
                             source={require('../../icons/leftarrow.png')} />
@@ -100,7 +70,7 @@ const AddDocument = ({ navigation,route }) => {
                 <View style={{ marginTop: 10, marginBottom: 40, alignItems: 'center', alignSelf: 'center' }}>
 
                     <Text style={styles.titleTextStyle}>
-                        Document
+                        Institution
                     </Text>
                 </View>
                 <ScrollView style={{ height: '100%', top: -5 }}
@@ -137,84 +107,26 @@ const AddDocument = ({ navigation,route }) => {
                     <View style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', marginHorizontal: 10, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, marginBottom: 5 }}>
                         <View style={{ borderBottomColor: '#202020', borderBottomWidth: 2, backgroundColor: 'rgba(255, 255, 255, 0.5)' }}>
                             <Text style={styles.nameComp}>
-                                Taxes
-                            </Text>
-                        </View>
-
-                        <TextInput
-                            placeholder="Add taxes"
-                            keyboardType="numeric"
-
-
-                            onChangeText={text => setPrice(text)}
-                            style={styles.normalTextStyle}
-                        />
-                    </View>
-                    <View style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', marginHorizontal: 10, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, marginBottom: 5 }}>
-                        <View style={{ borderBottomColor: '#202020', borderBottomWidth: 2, backgroundColor: 'rgba(255, 255, 255, 0.5)' }}>
-                            <Text style={styles.nameComp}>
                                 Image URL
                             </Text>
                         </View>
 
                         <TextInput
                             placeholder="Add image url"
+                            keyboardType="numeric"
+
+
                             onChangeText={text => setLinkImage(text)}
                             style={styles.normalTextStyle}
                         />
                     </View>
-                    <SelectDropdown
-                            defaultButtonText='Institution'
-                            defaultValue={route?.params?.chosenInstitution}
-                            data={institutions.map((elm) => elm?.data?.name)}
-                            onSelect={(selectedItem, index) => {
-                                console.log(selectedItem, index)
-                                setChosenInstitution(institutions[index]);
-                                console.log(chosenInstitution)
-                            }}
-                            dropdownStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius: 5 }}
-                            buttonStyle={{
-                                backgroundColor: 'rgba(255, 255, 255, 0.5)',
-                                borderRadius: 15,
-                                width: '50%',
-                                marginRight: 5,
-                                shadowColor: '#202020',
-                                shadowRadius: 15,
-                                shadowOffset: { height: 1 },
-                                shadowOpacity: 1,
-                            }}
-                        />
-                    {
-                        chosenDocs.map(({id,data})=>
-                        <RequirementsDocsItem key={makeid(14)} index ={id} name={data?.name} deleteInheriteDocs={deleteInheriteDocs}/>
-                        )
-                    }
-                    <SelectDropdown
-                        defaultButtonText='Requirement documents'
-                        data={documents.map((elm)=>elm.data?.name)}
-                        onSelect={(selectedItem, index) => {
-                            console.log(selectedItem, index)
-                            setChosenDocs([...chosenDocs,documents[index]]);
-                        }}
-                        dropdownStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius: 5 }}
-                        buttonStyle={{
-                            backgroundColor: 'rgba(255, 255, 255, 0.5)',
-                            borderRadius: 15,
-                            width: '60%',
-                            marginRight: 5,
-                            shadowColor: '#202020',
-                            shadowRadius: 15,
-                            shadowOffset: { height: 1 },
-                            shadowOpacity: 1,
-                        }}
-                    />
                     <View style={{
                         flexDirection: 'row',
                         alignItems: 'center',
                         alignSelf: 'center',
                         marginTop: 2
                     }}>
-                        <TouchableOpacity onPress={addDocument}>
+                        <TouchableOpacity onPress={addInstitution}>
                             <View style={{
                                 backgroundColor: 'rgba(255, 255, 255, 0.4)', padding: 10, paddingHorizontal: 40, marginHorizontal: 50, borderRadius: 10, shadowColor: '#202020',
                                 shadowRadius: 10,
@@ -235,7 +147,7 @@ const AddDocument = ({ navigation,route }) => {
     )
 }
 
-export default AddDocument
+export default AddInstitution
 
 const styles = StyleSheet.create({
     container: {

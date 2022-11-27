@@ -1,37 +1,36 @@
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View, TextInput, Keyboard } from 'react-native'
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View, TextInput,Image, Keyboard, SafeAreaView } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import AccountItem from '../../Components/AccountItem';
 import { LinearGradient } from 'expo-linear-gradient';
 import { db } from '../../firebase'
 import LottieView from "lottie-react-native";
 import colors from '../../colors';
+import InstitutionItem from '../../Components/InstitutionItem';
 
-const Accounts = ({navigation}) => {
+const Institutions = ({navigation}) => {
     const [searchText, setSearchText] = useState('');
-    const [accounts, setAccounts] = useState([]);
+    const [institutions, setInstitutions] = useState([]);
 
-    function deleteAccount(id) {
-        db.collection("users").doc(id).delete().then(() => {
-            console.log("Account successfuly deleted");
+    function deleteInstitution(id) {
+        db.collection("institutions").doc(id).delete().then(() => {
+            console.log("Institution successfuly deleted");
         }).catch((error) => alert(error));
-        navigation.goBack();
+        navigation.navigate("Institutions");
     }
-const enterAccount = (name, id, photoUrl, phoneNumber) => {
-        navigation.navigate('Modify account screen', {
+const modifyInstitution = (name, id, photoUrl, description) => {
+        navigation.navigate('Modify institution screen', {
             name: name,
             id: id,
             photoUrl: photoUrl,
-            phoneNumber: phoneNumber,
+            description: description
         });
     }
 
     useEffect(() => {
         const unsubscribe = db
-            .collection("users")
+            .collection("institutions")
             .onSnapshot(snapshot => {
-                setAccounts(
-                    snapshot.docs.filter((doc) => doc.data().ID == 1 || doc.data().ID == 2
-                    ).map((doc) => ({
+                setInstitutions(
+                    snapshot.docs.map((doc) => ({
                         id: doc.id,
                         data: doc.data()
                     })))
@@ -59,16 +58,22 @@ const enterAccount = (name, id, photoUrl, phoneNumber) => {
         }
         return true
     }
-
     return (
         <View style={styles.container}>
             <LinearGradient
                 colors={[colors.TAB_COLOR, 'white', 'white']}
                 style={styles.background}
             />
-            <View style={{ marginBottom: 20, marginTop: 100, alignSelf: 'center' }}>
+            <SafeAreaView style={{alignContent:'center',alignItems:'flex-end',marginRight:30,marginTop:60}}>
+                    <TouchableOpacity
+                        raised onPress={() => navigation.navigate("Add institution screen")}
+                    >
+                        <Image source={require('../../icons/add.png')} style={{ marginLeft: 10, width: 40, height: 40, marginBottom: 20 }}></Image>
+                    </TouchableOpacity>
+                </SafeAreaView>
+            <View style={{ marginBottom: 20, marginTop: 10, alignSelf: 'center' }}>
                 <Text style={styles.headerTextStyle}>
-                    Accounts
+                    Institutions
                 </Text>
             </View>
             <View style={{ marginBottom: 40, marginTop: 10 }}>
@@ -91,8 +96,8 @@ const enterAccount = (name, id, photoUrl, phoneNumber) => {
             <ScrollView style={{ height: '100%' }}>
 
                 {
-                    accounts.filter(filterZZZ).map(({ id, data: { name, photoUrl, phoneNumber } }) => (
-                        <AccountItem key={id} enterAccount={enterAccount} name={name} id={id} photoUrl={photoUrl} phoneNumber={phoneNumber} deleteAccount={deleteAccount} />
+                    institutions.filter(filterZZZ).map(({ id, data: { name, imageLink, description } }) => (
+                        <InstitutionItem key={id} modifyInstitution={modifyInstitution} name={name} id={id} description={description} photoUrl={imageLink} deleteInstitution={deleteInstitution} />
                     ))
                 }
 
@@ -103,7 +108,7 @@ const enterAccount = (name, id, photoUrl, phoneNumber) => {
     )
 }
 
-export default Accounts
+export default Institutions
 
 const styles = StyleSheet.create({
     animation: {
