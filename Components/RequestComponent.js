@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
+import colors from '../colors'
 
 
 
@@ -7,7 +8,7 @@ const RequestComponent = ({ docName, institutionName, id, day, mounth, year, hou
 
     return (
         <View key={id} style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.5)',
+            backgroundColor: colors.BEIGE,
         }}>
             <View style={styles.container}>
 

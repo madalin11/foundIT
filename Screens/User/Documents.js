@@ -6,15 +6,15 @@ import Login from '../Login'
 
 const Documents = (props) => {
   console.log("🚀 ~ AAAAAA", props.route.params.name)
+  console.log(props.navigation)
   const [ids, setIds] = useState(['123']) //ids from db
   const seeNecesarDocuments = () => {
     // navigation.navigate('Documents', {
     //     id: ids
     //})
-    
   }
   const navigateMap = () => {
-    //props.navigation.navigate("Map")
+    props.navigation.navigate("BigMap")
 }
 
   const [documentData, setDocumentData] = useState([
@@ -35,7 +35,25 @@ const Documents = (props) => {
         latitude: 46.33188180294243,
         longitude: 22.11581192960193
       }
-    }
+    },
+    {
+      id: 3,
+      name: "certificat",
+      location:
+      {
+        latitude: 46.33188180294243,
+        longitude: 22.11581192960193
+      }
+    },
+    {
+      id: 4,
+      name: "certificat",
+      location:
+      {
+        latitude: 46.33188180294243,
+        longitude: 22.11581192960193
+      }
+    },
   ])
 
   const renderItem = ({ item }) => (
@@ -48,7 +66,7 @@ const Documents = (props) => {
       <Map
         location={documentData[0].location}
         documentName={documentData[0].name}
-        //navigation ={navigation}
+        navigation ={props.navigation}
         seeNecesarDocuments = {seeNecesarDocuments}
         navigateMap = {navigateMap}
       />
@@ -57,7 +75,7 @@ const Documents = (props) => {
 
   return (
     <SafeAreaView style={styles.blogScreen}>
-      <Text style={styles.title}>Lista documente {props.route.params.name}</Text>
+      <Text style={styles.title}>{props.route.params.name}</Text>
       <View style={styles.containerFlat}>
         <FlatList
           data={documentData}
@@ -95,7 +113,7 @@ const styles = StyleSheet.create({
     //marginHorizontal: 10,
     marginTop: 10,
     //borderRadius: 15,
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: 'black',
   },
   title: {

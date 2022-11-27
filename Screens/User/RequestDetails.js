@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, SafeAreaView, Image } from 'react-native'
 import React from 'react'
 import { useState } from 'react'
 import CalendarStrip from 'react-native-calendar-strip';
-
+import cityhall from '../../assets/primaria.png'
+import colors from "../../colors"
 const RequestDetails = () => {
   const today = new Date();
 
@@ -13,8 +14,12 @@ const RequestDetails = () => {
     console.log(date)
   }
 
+  const makeApp = () => {
+    console.log("here")
+  }
+
   const [availableHours, setAvailableHours] = useState([
-    {
+    [{
       id: 1,
       hour: "9",
       isAvailable: true
@@ -33,58 +38,138 @@ const RequestDetails = () => {
       id: 4,
       hour: "12 am",
       isAvailable: true
+    }],
+    [{
+      id: 1,
+      hour: "9",
+      isAvailable: true
     },
     {
-      id: 5,
+      id: 2,
+      hour: "10 am",
+      isAvailable: false
+    },
+    {
+      id: 3,
       hour: "11 am",
       isAvailable: true
     },
     {
-      id: 6,
+      id: 4,
       hour: "12 am",
       isAvailable: true
     },
+    ],
+    [{
+      id: 1,
+      hour: "9",
+      isAvailable: true
+    },
     {
-      id: 7,
+      id: 2,
+      hour: "10 am",
+      isAvailable: true
+    },
+    {
+      id: 3,
       hour: "11 am",
       isAvailable: true
-    }
+    },
+    {
+      id: 4,
+      hour: "12 am",
+      isAvailable: true
+    }],
+    [
+      {
+        id: 1,
+        hour: "9",
+        isAvailable: true
+      },
+      {
+        id: 2,
+        hour: "10 am",
+        isAvailable: true
+      },
+      {
+        id: 3,
+        hour: "11 am",
+        isAvailable: true
+      },
+      {
+        id: 4,
+        hour: "12 am",
+        isAvailable: true
+      }]
   ])
+
+  // availableHours.map(hours => {
+  //   return hours.map(hour => {
+  //     console.log(hour)
+  //   }))
 
 
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <Text style={styles.title}>Institution</Text>
+        <Text style={styles.title}>Institution: City Hall</Text>
+      </View>
+      <View>
+        <Image
+          source={cityhall}
+          style={{ width: "100%", height: 200 }}
+          resizeMode="contain"
+        />
       </View>
       <View>
         <Text style={styles.title}>Date</Text>
-      </View>
-      <View style={styles.calendar}>
-        <CalendarStrip
-          style={styles.calendarContainer}
-          calendarHeaderStyle={styles.calendarHeaderStyle}
-          dayContainerStyle={styles.dayContainerStyle}
-          numDaysInWeek={7}
-          highlightDateNameStyle={styles.selectedDate}
-          highlightDateNumberStyle={styles.selectedDate}
-          selectedDate={today}
-          showMonth={true}
-          scrollable={true}
-          onDateSelected={(date) => setPickupDate(date)}
-        />
+
+        <View style={styles.calendar}>
+          <CalendarStrip
+            style={styles.calendarContainer}
+            calendarHeaderStyle={styles.calendarHeaderStyle}
+            dayContainerStyle={styles.dayContainerStyle}
+            numDaysInWeek={7}
+            highlightDateNameStyle={styles.selectedDate}
+            highlightDateNumberStyle={styles.selectedDate}
+            selectedDate={today}
+            showMonth={true}
+            scrollable={true}
+            onDateSelected={(date) => setPickupDate(date)}
+          />
+        </View>
       </View>
       <View style={styles.hourPicker}>
         <Text>
           Choose Time
         </Text>
         <ScrollView horizontal={true} >
-          {availableHours.map(hour => {
-            return <TouchableOpacity style={styles.hour} key={hour.id} onPress= {()=>setHour(hour.hour)}>
-              <Text>{hour.hour}</Text>
-            </TouchableOpacity>
+          {availableHours.map(hours => {
+            return (
+              <View>
+                {hours.map(hour => {
+                  return <TouchableOpacity style={styles.hour} key={hour.id} onPress={() => setHour(hour.hour)}>
+                    <Text>{hour.hour}</Text>
+                  </TouchableOpacity>
+                })}
+              </View>
+            )
           })}
         </ScrollView>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.mapButton}
+          onPress={makeApp}
+        >
+          <View style={styles.appointment}>
+            <Image
+              source={cityhall}
+              style={{ width: 30, height: 30, color: 'white' }}
+              resizeMode="contain"
+            />
+            <Text style={{ color: 'black' }}>Create Appointment</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   )
@@ -94,15 +179,14 @@ export default RequestDetails
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 60,
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    padding: 12,
+    //marginTop: 60,
+    //flex: 1,
+    //alignItems: 'center',
+    //justifyContent: 'space-around'
   },
-  calendar: {
-    marginTop: 60,
-    width: '100%',
-    bottom: 100
+  appointment: {
+    flexDirection: 'row'
   },
   calendarContainer: {
     height: 160,
@@ -120,22 +204,36 @@ const styles = StyleSheet.create({
 
   },
   hour: {
-    backgroundColor: 'red',
+    backgroundColor: colors.GREEN,
     borderRadius: 10,
-    marginHorizontal: 5,
+    margin: 5,
+    //padding: 20,
     width: 50,
     height: 50
   },
   selectedDate: {
-    color: 'red',
+    color: colors.GREEN,
     justifyContent: 'center'
+  },
+  mapButton: {
+    backgroundColor: colors.BLUE,
+    padding: 15,
+    top: 40,
+    justifyContent: 'center',
+    height: 40,
+    borderRadius: 15,
+    padding: 5
   },
   hourPicker: {
     //flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    height: 60,
+    //height: 60,
     //backgroundColor: 'black'
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
   title: {
     fontSize: 20,
