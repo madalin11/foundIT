@@ -63,7 +63,7 @@ const enterAccount = (name, id, photoUrl, phoneNumber) => {
     return (
         <View style={styles.container}>
             <LinearGradient
-                colors={[colors.TAB_COLOR, 'white', 'white']}
+                colors={[colors.BLUE, 'white', 'white']}
                 style={styles.background}
             />
             <View style={{ marginBottom: 20, marginTop: 100, alignSelf: 'center' }}>
@@ -83,7 +83,7 @@ const enterAccount = (name, id, photoUrl, phoneNumber) => {
 
                 <TouchableOpacity style={{flex:1, alignSelf:'flex-end', bottom:45,right:42  }} onPress={Keyboard.dismiss}>
                     {Platform.OS != 'web' ?
-                        <LottieView style={styles.animation} source={require("../../icons/search.json")} autoPlay loop />
+                        <LottieView style={styles.animation} source={require("../../icons/search.json")} />
                         : null}
                 </TouchableOpacity>
 
@@ -121,9 +121,9 @@ const styles = StyleSheet.create({
         fontFamily: 'Times New Roman',
         fontSize: 40,
         fontWeight: 'bold',
-        shadowColor: '#202020',
-        shadowOpacity: 1,
-        shadowRadius: 2,
+        // shadowColor: '#202020',
+        // shadowOpacity: 1,
+        // shadowRadius: 2,
         shadowOffset: { height: 3 }
     },
     background: {
@@ -131,6 +131,6 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         top: 0,
-        height: 800,
+        height: '100%',
     },
 })

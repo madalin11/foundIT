@@ -87,7 +87,7 @@ const AddDocument = ({ navigation,route }) => {
             <View onPress={() => Keyboard.dismiss} style={styles.container}>
                 <LinearGradient
                     // Background Linear Gradient
-                    colors={[colors.TAB_COLOR, 'white', 'white']}
+                    colors={[colors.BLUE, 'white', 'white']}
                     style={styles.background}
                 />
                 <View>

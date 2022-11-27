@@ -88,7 +88,7 @@ const modifyInstitution = (name, id, photoUrl, description) => {
 
                 <TouchableOpacity style={{flex:1, alignSelf:'flex-end', bottom:45,right:42  }} onPress={Keyboard.dismiss}>
                     {Platform.OS != 'web' ?
-                        <LottieView style={styles.animation} source={require("../../icons/search.json")} autoPlay loop />
+                        <LottieView style={styles.animation} source={require("../../icons/search.json")} />
                         : null}
                 </TouchableOpacity>
 
@@ -136,6 +136,6 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         top: 0,
-        height: 800,
+        height: '100%',
     },
 })
