@@ -24,7 +24,7 @@ const RequestComponent = ({ docName, institutionName, changeStatus, id, day, mou
                         fontWeight: '400',
                         fontSize: 20,
                     }}>
-                        {hour}:{minutes}
+                        {hour}
                     </Text>
                 </View>
                 <View style={{

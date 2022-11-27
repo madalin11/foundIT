@@ -28,7 +28,9 @@ const Requests = ({ navigation }) => {
       }
       )
     return unsubscribe;
-  }, [db])
+  }, [])
+
+  const date = new Date()
 
   function filterZZZ(element) {
     try {
@@ -82,18 +84,18 @@ const Requests = ({ navigation }) => {
       <View style={styles.container}>
         <Text style={styles.titleContainer}>Requests</Text>
         <ScrollView>
-          {appointments.filter(filterZZZ).map((item) => {
+          {appointments.map((item) => {
             return <OperandRequestComponent
               key={item.id}
               docName={item.data.documentName}
-              institutionName={item.data.institutionName}
+              institutionName={item.data.institution}
               id={item.id}
-              day={item.data.date.slice(9,11)}
-              mounth={11}
-              year={item.data.date.slice(14,18)}
-              hour={item.data.hour.slice(1,3)}
-              minutes={item.data.hour.slice(4,6)}
-              status={item.status}
+              day={new Date().getDay()}
+              mounth={new Date().getMonth()}
+              year={new Date(item.data.date.seconds).getFullYear()+ 52}
+              hour={item.data.hour}
+              //minutes={new Date(item.data.date.seconds).getMinutes()}
+              status={item.data.status}
               changeStatus={changeStatus}
             />
           })}
