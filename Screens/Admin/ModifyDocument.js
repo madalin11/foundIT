@@ -77,6 +77,7 @@ const ModifyDocument = ({ navigation, route }) => {
             imageLink: photoUrl,
             price: price,
             chosenInstitution: chosenInstitution?.data?.name,
+            institutionNameCoord: chosenInstitution?.data?.coordonate,
             documentsIds: docs.map(({id,data})=>id)
         })
 

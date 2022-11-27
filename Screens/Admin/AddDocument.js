@@ -45,7 +45,8 @@ const AddDocument = ({ navigation,route }) => {
             price: price,
             imageLink: linkImage || "https://thumbs.dreamstime.com/z/document-icon-vector-stack-paper-sheets-illustration-131104983.jpg",
             documentsIds: chosenDocs.map(({id,data})=>id),
-            chosenInstitution: chosenInstitution
+            chosenInstitution: chosenInstitution?.data?.name,
+            institutionCoord: chosenInstitution?.data?.coordonate
         }).then(() => {
             console.log("Document successfuly added");
         }).catch((error) => alert(error));

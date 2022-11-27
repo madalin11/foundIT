@@ -127,6 +127,6 @@ const styles = StyleSheet.create({
     shadowOpacity: .3,
   },
   scrollContainer: {
-    padding: 15,
+    height:'100%'
   }
 })

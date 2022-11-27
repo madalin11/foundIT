@@ -64,22 +64,6 @@ const UserTabNavigator = () => {
 
             }}
             />
-            <Tab.Screen name="Profile" component={ModifyProfile} options={{
-                tabBarIcon: ({ focused }) => (
-                    <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
-                        <Image
-                            source={require('../../icons/login.png')}
-                            resizeMode='contain'
-                            style={{
-                                width: 26,
-                                height: 26,
-                            }}
-                        />
-                    </View>
-                ),
-
-            }}
-            />
         </Tab.Navigator>
     )
 }

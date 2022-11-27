@@ -50,12 +50,9 @@ const styles = StyleSheet.create({
         // shadowOpacity: 0.8,
         // shadowRadius: 5,
         alignItems: 'flex-start',
-        borderColor: "black",
-        borderWidth: 2,
-        borderRadius: 20,
         padding: 15,
         backgroundColor: colors.BLUE,
-        marginTop: 20
+        marginTop: 10
     },
     nameContainer: {
         fontFamily: 'Times New Roman',
@@ -84,6 +81,5 @@ const styles = StyleSheet.create({
         flexDirection: 'row', 
         alignItems: 'center',
         justifyContent: 'flex-start',
-    
     }
 })
