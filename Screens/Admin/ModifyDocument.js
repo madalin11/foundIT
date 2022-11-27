@@ -115,7 +115,7 @@ const ModifyDocument = ({ navigation, route }) => {
                 />
 
                 <View>
-                    <TouchableOpacity style={{ marginTop: 60, marginLeft: 15, marginRight: -15 }} onPress={() => navigation.navigate('Documents')}>
+                    <TouchableOpacity style={{ marginTop: 60, marginLeft: 15, marginRight: -15 }} onPress={() => navigation.navigate('Documents admin')}>
                         <Image
                             style={{ alignSelf: 'flex-start', width: 22, height: 22 }}
                             source={require('../../icons/leftarrow.png')} />
