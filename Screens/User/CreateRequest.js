@@ -31,7 +31,7 @@ const CreateRequest = (props) => {
             username: userName,
             userId: userId,
             institution: institutionName,
-            status: 'pending',
+            status: 'In progress',
             documentId: props.route.params?.docId,
             documentName: props.route.params?.documentName
 
@@ -73,105 +73,105 @@ const CreateRequest = (props) => {
             position: Toast.positions.BOTTOM
         })
         setTimeout(function () {
-            props.navigation.goBack()
+            props.navigation.navigate('Home')
         }, 500);
     }
 
     const [availableHours, setAvailableHours] = useState([
         [{
             id: 1,
-            hour: "8 am",
+            hour: "08:00",
             isAvailable: true,
             isPressed: false
         },
         {
             id: 2,
-            hour: "9 am",
+            hour: "08:30",
             isAvailable: true,
             isPressed: false
         },
         {
             id: 3,
-            hour: "11 am",
+            hour: "09:00",
             isAvailable: false,
             isPressed: false
         },
         {
             id: 4,
-            hour: "12 am",
+            hour: "09:30",
             isAvailable: false,
             isPressed: false
         }],
         [{
             id: 5,
-            hour: "9",
+            hour: "10:00",
             isAvailable: true,
             isPressed: false
         },
         {
             id: 6,
-            hour: "10 am",
+            hour: "10:30",
             isAvailable: false
         },
         {
             id: 7,
-            hour: "11 am",
+            hour: "11:00",
             isAvailable: true,
             isPressed: false
         },
         {
             id: 8,
-            hour: "12 am",
+            hour: "11:30",
             isAvailable: true,
             isPressed: false
         },
         ],
         [{
             id: 9,
-            hour: "9",
+            hour: "12:00",
             isAvailable: true,
             isPressed: false
         },
         {
             id: 10,
-            hour: "10 am",
+            hour: "12:30",
             isAvailable: true,
             isPressed: false
         },
         {
             id: 11,
-            hour: "11 am",
+            hour: "13:00",
             isAvailable: true,
             isPressed: false
         },
         {
             id: 12,
-            hour: "12 am",
+            hour: "13:30",
             isAvailable: true,
             isPressed: false
         }],
         [
             {
                 id: 13,
-                hour: "9",
+                hour: "14:00",
                 isAvailable: true,
                 isPressed: false
             },
             {
                 id: 14,
-                hour: "10 am",
+                hour: "14:30",
                 isAvailable: true,
                 isPressed: false
             },
             {
                 id: 15,
-                hour: "11 am",
+                hour: "15:00",
                 isAvailable: true,
                 isPressed: false
             },
             {
                 id: 16,
-                hour: "12 am",
+                hour: "15:30",
                 isAvailable: true,
                 isPressed: false
             }]
@@ -239,7 +239,7 @@ const CreateRequest = (props) => {
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.mapButton}
-                    onPress={addAppointment } //&& makeApp
+                    onPress={addAppointment && makeApp} //
                 >
                     <View style={styles.appointment}>
                         <Image

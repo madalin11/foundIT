@@ -60,7 +60,7 @@ export const Map = (props) => {
         <View style={styles.mapContainer}>
             <View style={styles.navigationContainer}>
                 <View style={styles.document}>
-                    <Text style={styles.text}>{props.documentName}</Text>
+                    {/* <Text style={styles.text}>{props.documentName}</Text> */}
                     <Text style={styles.text}>{props.locationName}</Text>
                 </View>
             </View>
