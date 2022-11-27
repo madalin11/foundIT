@@ -80,7 +80,7 @@ const RequestComponent = ({ docName, institutionName, changeStatus, id, day, mou
                             paddingTop: 7,
                             
                         }}>
-                            <TouchableOpacity >
+                            <TouchableOpacity onPress={()=>changeStatus(id, "Accepted")}>
                                 {/* <Image
                                     style={{ tintColor: 'blue', alignSelf: 'center', width: 24, height: 24, borderRadius: 50 }}
                                     source={require('../iconsOurDent/inprogress.png')}
@@ -97,7 +97,7 @@ const RequestComponent = ({ docName, institutionName, changeStatus, id, day, mou
                             borderBottomRightRadius: 10,
                             
                         }}>
-                            <TouchableOpacity >
+                            <TouchableOpacity onPress={()=>changeStatus(id, "Rejected")}>
                                 {/* <Image
                                     style={{ tintColor: 'green', alignSelf: 'center', width: 24, height: 24, borderRadius: 50 }}
                                     source={require('../iconsOurDent/done.png')}

@@ -28,7 +28,7 @@ const Requests = ({ navigation }) => {
       }
       )
     return unsubscribe;
-  }, [])
+  }, [db])
 
   const date = new Date()
 
