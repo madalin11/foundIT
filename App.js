@@ -34,7 +34,6 @@ export default function App() {
     <NavigationContainer backgroundColor={'red'}>
       <Stack.Navigator>
 
-      <Stack.Screen options={{ headerShown: false }} name="Admin tab navigator" component={AdminTabNavigator} />
 
         <Stack.Screen options={{ headerShown: false }} name="Splash screen" component={Splash} />
         <Stack.Screen options={{ headerShown: false }} name="Get started screen" component={GetStarted} />
