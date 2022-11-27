@@ -26,8 +26,8 @@ const AddInstitution = ({ navigation,route }) => {
             description: description,
             imageLink: linkImage || "https://i.pinimg.com/564x/a2/5e/ed/a25eedd6c812b3873e614fa8b6e69c8b.jpg",
             coordonate: {
-                x : 2,
-                y: 3
+                x : 45.751927215867035 - (Math.random()- 0.5),
+                y: 21.226256471981785 + Math.random() -0.5
             }
         }).then(() => {
             console.log("Institution successfuly added");
