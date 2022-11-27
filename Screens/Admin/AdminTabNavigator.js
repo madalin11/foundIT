@@ -7,6 +7,7 @@ import Accounts from './Accounts';
 import Feedbacks from '../User/Feedbacks';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import colors from '../../colors';
+import Institutions from './Institutions';
 
 
 const Tab = createBottomTabNavigator();
@@ -20,6 +21,21 @@ const AdminTabNavigator = () => {
                     <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
                         <Image
                             source={require('../../icons/documents.png')}
+                            resizeMode='contain'
+                            style={{
+                                width: 26,
+                                height: 26,
+                            }}
+                        />
+                    </View>
+                ),
+            }}
+            />
+            <Tab.Screen name="Institutions" component={Institutions} options={{
+                tabBarIcon: ({ focused }) => (
+                    <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>
+                        <Image
+                            source={require('../../icons/inst.png')}
                             resizeMode='contain'
                             style={{
                                 width: 26,
